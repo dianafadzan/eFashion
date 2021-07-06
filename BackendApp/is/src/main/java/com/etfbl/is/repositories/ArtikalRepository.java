@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ArtikalRepository extends JpaRepository<ArtikalEntity,Integer> {
-    ArtikalEntity getByIdartikla(Integer id);
+    List<ArtikalEntity> getByIdartikla(Integer id);
+    ArtikalEntity getByIdartiklaAndVelicina(Integer id,String velicina);
     List<ArtikalEntity> getByNaziv(String naziv);
+
+    List<ArtikalEntity> getByNazivAndVelicina(String naziv,String velicina);
 }
