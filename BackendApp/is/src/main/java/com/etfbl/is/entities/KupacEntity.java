@@ -41,6 +41,6 @@ public class KupacEntity {
     private MjestoEntity mjesto;
     @OneToMany(mappedBy = "kupac")
     @JsonIgnore
-    private List<NarudzbaEntity> narudzbas;
+    private List<NarudzbaEntity> narudzbe;
 
 }
