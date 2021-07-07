@@ -23,6 +23,11 @@ public class ArtikalController {
         return repository.findAll();
     }
 
+    @GetMapping("/svi")
+    public List<ArtikalEntity> findAllRazliciti(){
+        return repository.findAllRazliciti();
+    }
+
     @GetMapping("/{id}")
     public List<ArtikalEntity> getById(@PathVariable Integer id) {
         return repository.getByIdartikla(id);
