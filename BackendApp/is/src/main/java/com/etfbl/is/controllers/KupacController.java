@@ -3,7 +3,6 @@ package com.etfbl.is.controllers;
 import com.etfbl.is.entities.KupacEntity;
 import com.etfbl.is.entities.NarudzbaEntity;
 import com.etfbl.is.repositories.KupacRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,6 @@ import java.util.List;
 @RequestMapping("/kupci")
 public class KupacController {
 
-    @Autowired
     private final KupacRepository repository;
 
     public KupacController(KupacRepository repository) {
@@ -64,7 +62,9 @@ public class KupacController {
     @GetMapping("/{username}/narudzbe")
     public List<NarudzbaEntity> narudzbe(@PathVariable String username){
         KupacEntity kupac=repository.getByUsername(username);
-        return kupac.getNarudzbe();
+        if(kupac!=null)
+            return kupac.getNarudzbe();
+        return null;
     }
 
 }

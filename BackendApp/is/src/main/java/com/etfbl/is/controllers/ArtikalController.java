@@ -1,9 +1,7 @@
 package com.etfbl.is.controllers;
 
 import com.etfbl.is.entities.ArtikalEntity;
-import com.etfbl.is.entities.KupacEntity;
 import com.etfbl.is.repositories.ArtikalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +11,6 @@ import java.util.List;
 @RequestMapping("/artikli")
 public class ArtikalController {
 
-    @Autowired
     private final ArtikalRepository repository;
 
 
@@ -37,35 +34,35 @@ public class ArtikalController {
     }
 
     @GetMapping("/{id}/{velicina}")
-    public ArtikalEntity getByIdAndVelicina(@PathVariable Integer id,@PathVariable String velicina){
-        return repository.getByIdartiklaAndVelicina(id,velicina);
+    public ArtikalEntity getByIdAndVelicina(@PathVariable Integer id, @PathVariable String velicina) {
+        return repository.getByIdartiklaAndVelicina(id, velicina);
     }
 
     @GetMapping("/naziv/{naziv}/{velicina}")
-    public List<ArtikalEntity> getByNazivAndVelicina(@PathVariable String naziv,@PathVariable String velicina){
-        return repository.getByNazivAndVelicina(naziv,velicina);
+    public List<ArtikalEntity> getByNazivAndVelicina(@PathVariable String naziv, @PathVariable String velicina) {
+        return repository.getByNazivAndVelicina(naziv, velicina);
     }
 
     @PostMapping
-    public HttpStatus dodajArtikal(@RequestBody ArtikalEntity artikal){
-        try{
+    public HttpStatus dodajArtikal(@RequestBody ArtikalEntity artikal) {
+        try {
             repository.saveAndFlush(artikal);
             return HttpStatus.valueOf(200);
-        }catch (Exception e){
+        } catch (Exception e) {
             return HttpStatus.valueOf(500);
         }
     }
 
     @PutMapping("/{id}/{velicina}")
-    public ArtikalEntity updateArtikal(@PathVariable Integer id,@PathVariable String velicina,@RequestBody ArtikalEntity artikal){
-        ArtikalEntity a=repository.getByIdartiklaAndVelicina(id,velicina);
-        if(a!=null){
+    public ArtikalEntity updateArtikal(@PathVariable Integer id, @PathVariable String velicina, @RequestBody ArtikalEntity artikal) {
+        ArtikalEntity a = repository.getByIdartiklaAndVelicina(id, velicina);
+        if (a != null) {
             artikal.setIdartikla(id);
             artikal.setVelicina(velicina);
             repository.saveAndFlush(artikal);
             return artikal;
         }
-        return  null;
+        return null;
     }
 
 

@@ -1,12 +1,10 @@
 package com.etfbl.is.controllers;
 
+import com.etfbl.is.entities.KupacEntity;
 import com.etfbl.is.entities.MjestoEntity;
 import com.etfbl.is.repositories.MjestoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,7 +12,6 @@ import java.util.List;
 @RequestMapping("/mjesta")
 public class MjestoController {
 
-    @Autowired
     private final MjestoRepository repository;
 
     public MjestoController(MjestoRepository repository) {
@@ -35,5 +32,24 @@ public class MjestoController {
     @GetMapping("/naziv/{naziv}")
     public MjestoEntity findByNaziv(@PathVariable String naziv){
         return repository.getByNaziv(naziv);
+    }
+
+    @PostMapping
+    public HttpStatus dodaj(@RequestBody MjestoEntity narudzba){
+        try{
+            repository.saveAndFlush(narudzba);
+            return HttpStatus.valueOf(200);
+        }
+        catch (Exception ex){
+            return HttpStatus.valueOf(500);
+        }
+    }
+
+    @GetMapping("/kupci/{postBroj}")
+    public List<KupacEntity> kupci(@PathVariable Integer postBroj){
+        MjestoEntity mjesto=repository.getByPostanskibroj(postBroj);
+        if(mjesto!=null)
+            return mjesto.getKupacs();
+        return null;
     }
 }
