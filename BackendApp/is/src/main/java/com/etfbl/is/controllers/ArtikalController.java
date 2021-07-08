@@ -23,9 +23,14 @@ public class ArtikalController {
         return repository.findAll();
     }
 
-    @GetMapping("/svi")
-    public List<ArtikalEntity> findAllRazliciti(){
-        return repository.findAllRazliciti();
+    @GetMapping("/svi/id")
+    public List<ArtikalEntity> findAllRazlicitiId(){
+        return repository.findAllRazlicitiId();
+    }
+
+    @GetMapping("/svi/naziv")
+    public List<ArtikalEntity> findAllRazlicitiNaziv(){
+        return repository.findAllRazlicinitNaziv();
     }
 
     @GetMapping("/{id}")

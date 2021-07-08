@@ -2,10 +2,8 @@ package com.etfbl.is.repositories;
 
 import com.etfbl.is.entities.ArtikalEntity;
 import com.etfbl.is.entities.ArtikalEntityPK;
-import com.etfbl.is.entities.KupacEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
@@ -15,6 +13,11 @@ public interface ArtikalRepository extends JpaRepository<ArtikalEntity, ArtikalE
     List<ArtikalEntity> getByNaziv(String naziv);
 
     List<ArtikalEntity> getByNazivAndVelicina(String naziv,String velicina);
+
     @Query("select a from ArtikalEntity a group by a.idartikla")
-    List<ArtikalEntity> findAllRazliciti();
+    List<ArtikalEntity> findAllRazlicitiId();
+
+    @Query("select a from ArtikalEntity a group by a.naziv")
+    List<ArtikalEntity> findAllRazlicinitNaziv();
+
 }
