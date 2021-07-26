@@ -1,12 +1,11 @@
 package com.etfbl.is.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @Entity
