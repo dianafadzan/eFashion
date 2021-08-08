@@ -1,11 +1,13 @@
 package com.etfbl.is.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -33,6 +35,7 @@ public class RadnikEntity {
     @Column(name = "aktivan", nullable = false)
     private Byte aktivan;
     @OneToOne(mappedBy = "radnik")
+    @JsonIgnore
     private AdministratorEntity administrator;
     @OneToMany(mappedBy = "radnik")
     @JsonIgnore
