@@ -35,17 +35,29 @@ public class ArtikalController {
         return repository.findAllRazlicinitNaziv();
     }
 
-     */
+    */
 
     @GetMapping("/{sifra}")
     public ArtikalEntity getBySifra(@PathVariable Integer sifra) {
         return repository.getBySifra(sifra);
     }
 
+    /*
+
     @GetMapping("/kategorija")
     public List<ArtikalEntity> getByKategorija(@RequestBody KategorijaEntity kategorija) {
         return repository.getAllByKategorija(kategorija);
     }
+
+    */
+
+    @GetMapping("/kategorija/string")
+    public String getByKategorija() {
+        return "Kategorijaaaaa";
+    }
+
+
+
 
     @GetMapping("/kategorija/{naziv}/{velicina}")
     public List<ArtikalEntity> getByKategorijaVelicina(@PathVariable String naziv, @PathVariable String velicina) {
