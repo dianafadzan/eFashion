@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Http;
+using System.Net;
+using System.Net.Http.Headers;
+
 
 namespace GuiPrvaVerzija
 {
@@ -24,8 +28,19 @@ namespace GuiPrvaVerzija
         {
             InitializeComponent();
             FocusManager.SetFocusedElement(this, tbUsername);
-
+            
         }
+
+        static async Task Main(string []args)
+        {
+            var novi = new MainWindow();
+            await Utilities.RunAsync();
+        }
+        
+       
+
+
+
 
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -36,6 +51,8 @@ namespace GuiPrvaVerzija
         {
             
             new AdminastrorPocetniProzor().Show();
+            //var k = new kategorija(4, "suknja");
+                    
             this.Hide();
         }
     }

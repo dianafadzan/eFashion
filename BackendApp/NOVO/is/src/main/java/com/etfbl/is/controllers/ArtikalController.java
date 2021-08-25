@@ -42,21 +42,21 @@ public class ArtikalController {
         return repository.getBySifra(sifra);
     }
 
-    /*
+
 
     @GetMapping("/kategorija")
     public List<ArtikalEntity> getByKategorija(@RequestBody KategorijaEntity kategorija) {
         return repository.getAllByKategorija(kategorija);
     }
 
-    */
+    /*
 
     @GetMapping("/kategorija/string")
     public String getByKategorija() {
         return "Kategorijaaaaa";
     }
 
-
+    */
 
 
     @GetMapping("/kategorija/{naziv}/{velicina}")

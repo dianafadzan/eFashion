@@ -22,7 +22,7 @@ namespace GuiPrvaVerzija
         public PregledRacunaProzor()
         {
             InitializeComponent();
-            Racun racun = new Racun(7);
+            /*racun racun = new Racun(7);
             tbSifra.Text = racun.id;
             tbIme.Text = racun.id;
             tbDatum.Text = racun.id;
@@ -34,7 +34,7 @@ namespace GuiPrvaVerzija
             tbUkupno.Text = ukupno.ToString()+" KM";
             RacunTable.ItemsSource = racun.niz;
             RacunTable.Items.Refresh();
-
+            */
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

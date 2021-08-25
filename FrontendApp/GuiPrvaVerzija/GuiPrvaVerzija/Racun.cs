@@ -7,10 +7,23 @@ using System.Threading.Tasks;
 
 namespace GuiPrvaVerzija
 {
-    class Racun
+    class racun
     {
-        public string id { get; set; }
-        public List<Stavka> niz = new List<Stavka>();
+        public int idracuna { get; set; }
+        public DateTime datum { get; set; }
+        public decimal ukupno { get; set; }
+        public string radnik_jmb { get; set; }
+
+        /*public List<Stavka> niz = new List<Stavka>();
+
+        public racun(int idracuna, DateTime datum, decimal ukupno, string radnik_jmb)
+        {
+            this.idracuna = idracuna;
+            this.datum = datum;
+            this.ukupno = ukupno;
+            this.radnik_jmb = radnik_jmb;
+        }
+
         
         public Racun(int broj)
         {
@@ -20,6 +33,9 @@ namespace GuiPrvaVerzija
                 niz.Add(new Stavka(i.ToString(), "majica" + i.ToString(), i, i + 2.5));
             }
         }
-        
+        */
     }
+
+
+
 }

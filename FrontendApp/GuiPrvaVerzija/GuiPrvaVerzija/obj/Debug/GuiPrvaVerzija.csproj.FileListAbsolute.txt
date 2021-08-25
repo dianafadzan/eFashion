@@ -21,3 +21,6 @@ C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\
 C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.csproj.CoreCompileInputs.cache
 C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.exe
 C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.pdb
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.csproj.CopyComplete

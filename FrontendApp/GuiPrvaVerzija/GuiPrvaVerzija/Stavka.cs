@@ -6,19 +6,22 @@ using System.Threading.Tasks;
 
 namespace GuiPrvaVerzija
 {
-    class Stavka
+    class stavka
     {
-        public string sifra { get; set; }
-        public string naziv { get; set; }
+        public int racun_idracuna { get; set; }
+        public string artikal_sifra { get; set; }
         public int kolicina { get; set; }
-        public double cijena { get; set; }
+        public decimal cijena { get; set; }
 
-        public Stavka(string sifra, string naziv, int kolicina, double cijena)
+        /*
+        public stavka(int racun_idracuna, string artikal_sifra, int kolicina, decimal cijena)
         {
-            this.sifra = sifra;
-            this.naziv = naziv;
+            this.racun_idracuna = racun_idracuna;
+            this.artikal_sifra = artikal_sifra;
             this.kolicina = kolicina;
             this.cijena = cijena;
         }
+
+        */
     }
 }
