@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.Net.Http;
 using System.Net;
 using System.Net.Http.Headers;
-
+using System.Security.Cryptography;
 
 namespace GuiPrvaVerzija
 {
@@ -47,16 +47,44 @@ namespace GuiPrvaVerzija
             Environment.Exit(0);
         }
 
+
+        public static string GetSHA256(string password)
+        {
+            using (var sha256 = new SHA256Managed())
+            {
+                return BitConverter.ToString(sha256.ComputeHash(Encoding.UTF8.GetBytes(password))).Replace("-", "").ToLower();
+            }
+        }
+
+
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+
+            String username = tbUsername.Text;
+            String password = GetSHA256(pbSifra.Password);
+            var administratori = await Utilities.GetAdministratoriAsync("http://localhost:9000/administratori");
+            bool pronadjen = false;
+            administrator praviAdmin = null;
+            foreach(var admin in administratori)
+            {
+                if(admin.radnik.username.Equals(username) && admin.radnik.lozinka.Equals(password))
+                {
+                    pronadjen = true;
+                    praviAdmin = admin;
+                }
+            }
+            if (pronadjen)
+            {
+                new AdminastrorPocetniProzor(praviAdmin).Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Ne postoji administrator sa tim kredencijalima");
+                tbUsername.Text = "";
+                pbSifra.Password = "";
+            }
             
-            new AdminastrorPocetniProzor().Show();
-            var k = await Utilities.GetRacunAsync("http://localhost:9000/racuni/1");           
-            k.ukupno = 30.00M;
-            Console.WriteLine(k.ukupno);
-            var t = await Utilities.UpdateRacunAsync(k);
-            Console.WriteLine(t);
-            this.Hide();
         }
     }
 }

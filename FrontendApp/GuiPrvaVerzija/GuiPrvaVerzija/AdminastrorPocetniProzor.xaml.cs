@@ -24,11 +24,23 @@ namespace GuiPrvaVerzija
     public partial class AdminastrorPocetniProzor : Window
     {
         private Boolean VecPokrenuto = false;
-        public AdminastrorPocetniProzor()
+
+
+        //lista racuna
+        List<racun> listaRacuna = new List<racun>();
+        List<kategorija> listaKategorija = new List<kategorija>();
+
+        private async void inicijalizacija()
+        {
+            listaRacuna = await Utilities.GetRacuniAsync("http://localhost:9000/racuni");
+            listaKategorija = await Utilities.GetKategorijeAsync("http://localhost:9000/kategorije");
+        }
+        public AdminastrorPocetniProzor(administrator admin)
         {
             InitializeComponent();
             PocetniCanvas.Visibility = Visibility.Visible;
             HideAllCanvas();
+            inicijalizacija();
         }
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -66,7 +78,7 @@ namespace GuiPrvaVerzija
                 MovePocetniCanvas();
                 await Task.Delay(2000);
                 VecPokrenuto = true;
-            }            
+            }
             UnosRobeCanvas.Visibility = Visibility.Visible;
 
         }
@@ -95,6 +107,8 @@ namespace GuiPrvaVerzija
                 VecPokrenuto = true;
             }
             PregledRacunaCanvas.Visibility = Visibility.Visible;
+            RacuniTabela4.ItemsSource = listaRacuna;
+            RacuniTabela4.Items.Refresh();
         }
 
         private async void btnPregledArt_Click(object sender, RoutedEventArgs e)
@@ -108,12 +122,17 @@ namespace GuiPrvaVerzija
                 VecPokrenuto = true;
             }
             PregledProdajeCanvas.Visibility = Visibility.Visible;
-            
-            
+
+
             dpDatumPoc.DisplayDate = DateTime.Today;
             dpDatumKraj.DisplayDate = DateTime.Today;
             //popuniTabelu();
+
             //treba povuci kategorije iz baze i staviti ih ovdje
+            foreach (var kat in listaKategorija)
+            {
+                cbKategorija3.Items.Add(kat.naziv);
+            }
         }
 
         private async void btnPregledZarade_Click(object sender, RoutedEventArgs e)
@@ -190,8 +209,8 @@ namespace GuiPrvaVerzija
             tbNazivApp.Visibility = Visibility.Visible;
         }
 
-        
-        
+
+
         //Canvas Dodaj novi artikal
 
         private void btnSacuvajNoviArtikal_Click(object sender, RoutedEventArgs e)
@@ -209,7 +228,7 @@ namespace GuiPrvaVerzija
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             {
-                openFileDialog.InitialDirectory = projectDirectory+"\\GuiPrvaVerzija\\odjeca";
+                openFileDialog.InitialDirectory = projectDirectory + "\\GuiPrvaVerzija\\odjeca";
                 openFileDialog.Filter = "All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
@@ -219,10 +238,10 @@ namespace GuiPrvaVerzija
                 if (result == true)
                 {
                     filePath = openFileDialog.SafeFileName;
-                    var uriSource = new Uri(@"/GuiPrvaVerzija;component/odjeca/"+ filePath, UriKind.Relative);
+                    var uriSource = new Uri(@"/GuiPrvaVerzija;component/odjeca/" + filePath, UriKind.Relative);
                     Slika.Source = new BitmapImage(uriSource);
                 }
-            }            
+            }
         }
 
 
@@ -322,6 +341,10 @@ namespace GuiPrvaVerzija
                 var filtrirani = sviRacuni.Where(racun => racun.sifra.ToLower().StartsWith(tbSifra4.Text.ToLower()));
                 RacuniTabela4.ItemsSource = filtrirani;
              */
+
+            var filtrirani = listaRacuna.Where(racun => racun.idracuna == int.Parse(tbSifra4.Text));
+            RacuniTabela4.ItemsSource = filtrirani;
+            RacuniTabela4.Items.Refresh();
         }
 
         private void btnPogledajRacun4_Click(object sender, RoutedEventArgs e)
@@ -329,7 +352,7 @@ namespace GuiPrvaVerzija
             new PregledRacunaProzor().ShowDialog();
         }
 
-      
+
 
         private void dpDatum4_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -381,7 +404,7 @@ namespace GuiPrvaVerzija
 
         }
 
-        
+
         private void btnDodajRadnika_Click(object sender, RoutedEventArgs e)
         {
             new DodajAzurirajRadnikaProzor().ShowDialog();
