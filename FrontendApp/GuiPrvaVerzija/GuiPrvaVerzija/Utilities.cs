@@ -219,7 +219,7 @@ namespace GuiPrvaVerzija
                     product = JsonConvert.DeserializeObject<List<kategorija>>(await response.Content.ReadAsStringAsync());
                 }
                 
-                return product;
+                 return  product;
             }
             catch (Exception ex)
             {
@@ -228,36 +228,215 @@ namespace GuiPrvaVerzija
             }
         }
 
-        /*
+        
 
-        public static async void CreateRacuntAsync(kategorija product)
+        public static async Task<string> CreateKategorijaAsync(kategorija product)
         {
-            /*StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(
-                "api/products", product);
-            response.EnsureSuccessStatusCode();
-
-            // return URI of the created resource.
-            return response.Headers.Location; 
-            
+            var response = string.Empty;
             try
             {
-                Console.WriteLine("create");
-                var stringPayload = JsonConvert.SerializeObject(product);
-                HttpContent httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
-                var httpResponse =  client.PostAsync("http://localhost:9000/kategorije", httpContent).Result.Content.ReadAsStringAsync(); 
-               
                 
+                Uri u = new Uri("http://localhost:9000/kategorije");
+                string strPayload = JsonConvert.SerializeObject(product);
+                HttpContent c = new StringContent(strPayload, Encoding.UTF8, "application/json");
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+                
+                return response;
+                    
+
             }catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                
+                Console.WriteLine(ex.InnerException);
+                return response;
             }
         }
 
-
-        public static async Task<racun> UpdateProductAsync(racun product)
+        public static async Task<string> CreateRacunAsync(racun product)
         {
+            var response = string.Empty;
+            try
+            {
+                
+                Uri u = new Uri("http://localhost:9000/racuni");
+                string strPayload = JsonConvert.SerializeObject(product);
+                HttpContent c = new StringContent(strPayload, Encoding.UTF8, "application/json");
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return response;
+            }
+        }
+
+        public static async Task<string> CreateArtikalAsync(artikal product)
+        {
+            var response = string.Empty;
+            try
+            {
+                
+                Uri u = new Uri("http://localhost:9000/artikli");
+                string strPayload = JsonConvert.SerializeObject(product);
+                HttpContent c = new StringContent(strPayload, Encoding.UTF8, "application/json");
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return response;
+            }
+        }
+
+        public static async Task<string> CreateAdministratorAsync(administrator product)
+        {
+            var response = string.Empty;
+            try
+            {
+                
+                Uri u = new Uri("http://localhost:9000/administratori");
+                string strPayload = JsonConvert.SerializeObject(product);
+                HttpContent c = new StringContent(strPayload, Encoding.UTF8, "application/json");
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return response;
+            }
+        }
+
+        public static async Task<string> CreateRadnikAsync(radnik product)
+        {
+            var response = string.Empty;
+            try
+            {
+                
+                Uri u = new Uri("http://localhost:9000/radnici");
+                string strPayload = JsonConvert.SerializeObject(product);
+                HttpContent c = new StringContent(strPayload, Encoding.UTF8, "application/json");
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return response;
+            }
+        }
+
+        public static async Task<String> CreateStavkaAsync(stavka product)
+        {
+            var response = string.Empty;
+            try
+            {
+                
+                Uri u = new Uri("http://localhost:9000/stavke");
+                string strPayload = JsonConvert.SerializeObject(product);
+                HttpContent c = new StringContent(strPayload, Encoding.UTF8, "application/json");
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+                
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return response;
+            }
+        }
+
+        public static async Task<String> UpdateRacunAsync(racun product)
+        {
+            Uri u = new Uri("http://localhost:9000/racuni/"+product.idracuna);
+            string strPayload = JsonConvert.SerializeObject(product);
+            HttpContent content = new StringContent(strPayload, Encoding.UTF8, "application/json");
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = await client.PutAsync(u, content);
+            string result = await response.Content.ReadAsStringAsync();
+            return result;
+        }
+
+
+
+
+        /*
+
+        public static async Task<string> UpdateProductAsync(racun product)
+        {
+
             HttpResponseMessage response = await client.PutAsJsonAsync(
                 $"api/products/{product.Id}", product);
             response.EnsureSuccessStatusCode();
@@ -266,6 +445,8 @@ namespace GuiPrvaVerzija
             product = await response.Content.ReadAsAsync<racun>();
             return product;
         }
+
+        
 
         public static async Task<HttpStatusCode> DeleteProductAsync(string id)
         {

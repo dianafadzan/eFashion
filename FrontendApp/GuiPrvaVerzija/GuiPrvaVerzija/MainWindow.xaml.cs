@@ -47,12 +47,15 @@ namespace GuiPrvaVerzija
             Environment.Exit(0);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             
             new AdminastrorPocetniProzor().Show();
-            //var k = new kategorija(4, "suknja");
-                    
+            var k = await Utilities.GetRacunAsync("http://localhost:9000/racuni/1");           
+            k.ukupno = 30.00M;
+            Console.WriteLine(k.ukupno);
+            var t = await Utilities.UpdateRacunAsync(k);
+            Console.WriteLine(t);
             this.Hide();
         }
     }

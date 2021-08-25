@@ -12,7 +12,7 @@ namespace GuiPrvaVerzija
         public int idracuna { get; set; }
         public DateTime datum { get; set; }
         public decimal ukupno { get; set; }
-        public string radnik_jmb { get; set; }
+        public radnik radnik { get; set; }
 
         /*public List<Stavka> niz = new List<Stavka>();
 
