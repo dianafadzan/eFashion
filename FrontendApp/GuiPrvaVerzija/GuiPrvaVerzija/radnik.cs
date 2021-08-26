@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace GuiPrvaVerzija
 {
-    class radnik
+    public class radnik
     {
         public string jmb { get; set; }
         public string ime { get; set; }
         public string prezime { get; set; }
         public string username { get; set; }
         public string lozinka { get; set; }
-        public decimal plata { get; set; }
+        public double plata { get; set; }
         public Boolean aktivan { get; set; }
 
         /*

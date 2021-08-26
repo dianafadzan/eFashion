@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuiPrvaVerzija
 {
-    class administrator
+    public class administrator
     {
         public string radnik_jmb { get; set; }
         public radnik radnik { get; set; }

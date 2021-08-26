@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuiPrvaVerzija
 {
-    class artikal
+    public class artikal
     {
         public int sifra { get; set; }
         public string naziv { get; set; }

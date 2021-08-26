@@ -52,10 +52,10 @@ namespace GuiPrvaVerzija
             
             new AdminastrorPocetniProzor().Show();
             var k = await Utilities.GetRacunAsync("http://localhost:9000/racuni/1");           
-            k.ukupno = 30.00M;
+            k.ukupno = 30.00;
             Console.WriteLine(k.ukupno);
-            var t = await Utilities.UpdateRacunAsync(k);
-            Console.WriteLine(t);
+            var t = Task.Run(() => Utilities.UpdateRacunAsync(k));
+            Console.WriteLine(t.Result);
             this.Hide();
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
@@ -386,7 +387,7 @@ namespace GuiPrvaVerzija
             }
         }
 
-        public static async Task<String> CreateStavkaAsync(stavka product)
+        public static async Task<string> CreateStavkaAsync(stavka product)
         {
             var response = string.Empty;
             try
@@ -418,15 +419,41 @@ namespace GuiPrvaVerzija
             }
         }
 
-        public static async Task<String> UpdateRacunAsync(racun product)
+        public static async Task<string> UpdateRacunAsync(racun product)
         {
-            Uri u = new Uri("http://localhost:9000/racuni/"+product.idracuna);
-            string strPayload = JsonConvert.SerializeObject(product);
-            HttpContent content = new StringContent(strPayload, Encoding.UTF8, "application/json");
-            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await client.PutAsync(u, content);
-            string result = await response.Content.ReadAsStringAsync();
-            return result;
+            var response = string.Empty;
+            try
+            {
+                Uri u = new Uri("http://localhost:9000/racuni/"+product.idracuna);
+                string str = JsonConvert.SerializeObject(product);
+                byte[] poruka = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(product));
+                HttpContent c = new StringContent(str, Encoding.UTF8, "application/json");
+                //HttpContent c = new ByteArrayContent(poruka);
+                //c.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                //c.Headers.ContentEncoding.Add("Encoding.UTF8");
+                Console.WriteLine(str);
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Put,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+                Console.WriteLine("Rezultat" + result);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return response;
+            }
+
         }
 
 

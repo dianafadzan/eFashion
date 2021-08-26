@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuiPrvaVerzija
 {
-    class stavka
+    public class stavka
     {
         public int racun_idracuna { get; set; }
         public string artikal_sifra { get; set; }
