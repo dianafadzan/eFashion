@@ -19,18 +19,26 @@ namespace GuiPrvaVerzija
     /// </summary>
     public partial class PregledRacunaProzor : Window
     {
+        List<stavka> nizStavki=new List<stavka>();
+        racun rac;
+
+        private async void inicijalizacija()
+        {
+            nizStavki = await Utilities.GetStavkeAsync("http://localhost:9000/stavke/" + rac.idracuna);
+            RacunTable.ItemsSource = nizStavki;
+            RacunTable.Items.Refresh();
+        }
         public PregledRacunaProzor(racun r)
         {
+            rac = r;
             InitializeComponent();
+            inicijalizacija();
             tbSifra.Text = r.idracuna+"";
             tbIme.Text=r.radnik.ime+" "+r.radnik.prezime;
             tbDatum.Text = r.datum.ToString("dd MM yyyy");
             tbUkupno.Text = r.ukupno.ToString()+" KM";
-
-            /*
-            RacunTable.ItemsSource = racun.niz;
-            RacunTable.Items.Refresh();
-            */
+            
+            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

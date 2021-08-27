@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,8 +26,9 @@ namespace GuiPrvaVerzija
     {
         private Boolean VecPokrenuto = false;
 
+        string putanjaZaSlike = @"C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\BackendApp\NOVO\slikeOdjece";
+        string nazivSlike = "";
 
-        //lista racuna
         List<racun> listaRacuna = new List<racun>();
         List<kategorija> listaKategorija = new List<kategorija>();
         List<radnik> listaRadnika = new List<radnik>();
@@ -34,6 +36,8 @@ namespace GuiPrvaVerzija
         List<artikal> listaArtikala = new List<artikal>();
 
         List<radnik> radniciUTabeli = new List<radnik>();
+
+        artikal aZaIzmjenu;
 
         private async void inicijalizacija()
         {
@@ -92,6 +96,7 @@ namespace GuiPrvaVerzija
             cbxKategorija.Items.Clear();
             foreach (kategorija k in listaKategorija)
                 cbxKategorija.Items.Add(k.naziv);
+            ponistiDodajNovi();
 
         }
 
@@ -109,6 +114,7 @@ namespace GuiPrvaVerzija
             cbxKategorija2.Items.Clear();
             foreach (kategorija k in listaKategorija)
                 cbxKategorija2.Items.Add(k.naziv);
+            ponistiIzmjenu();
         }
 
         private async void btnPregledRacuna_Click(object sender, RoutedEventArgs e)
@@ -165,6 +171,9 @@ namespace GuiPrvaVerzija
                 VecPokrenuto = true;
             }
             PregledZaradeCanvas.Visibility = Visibility.Visible;
+            dpDatumPoc5.SelectedDate = DateTime.Today;
+            dpDatumKraj5.SelectedDate = DateTime.Today;
+            zaradaPoc();
         }
 
         private async void btnIzmjenaZaposlenih_Click(object sender, RoutedEventArgs e)
@@ -239,11 +248,91 @@ namespace GuiPrvaVerzija
         }
 
 
+        public void ponistiDodajNovi()
+        {
+            nazivSlike = "";
+            var uriSource = new Uri(@"C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\add.png", UriKind.Absolute);
+            Slika.Source = new BitmapImage(uriSource);
+            tbNaziv.Text = "";
+            tbKolicina.Text = "";
+            tbCijena.Text = "";
+            tbVelicina.Text = "";
+            cbxKategorija.SelectedIndex = -1;
+        }
+
+        public void ponistiIzmjenu()
+        {
+            nazivSlike = "";
+            var uriSource = new Uri(@"C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\add.png", UriKind.Absolute);
+            Slika2.Source = new BitmapImage(uriSource);
+            tbNaziv2.Text = "";
+            tbKolicina2.Text = "";
+            tbCijena2.Text = "";
+            tbVelicina2.Text = "";
+            cbxKategorija2.SelectedIndex = -1;
+            tbSifra2.Text = "";
+        }
+
+        public void zaradaPoc()
+        {
+            if (VecPokrenuto)
+            {
+                DateTime datumPoc = (DateTime)dpDatumPoc5.SelectedDate;
+                DateTime datumKraj = (DateTime)dpDatumKraj5.SelectedDate;
+                decimal zarada = 0;
+                foreach (var r in listaRacuna)
+                    if (DateTime.Compare(r.datum, datumPoc) >= 0 && DateTime.Compare(r.datum, datumKraj) <= 0)
+                    {
+                        zarada += r.ukupno;
+                    }
+                tbZarada.Text = zarada + " KM";
+            }
+        }
 
         //Canvas Dodaj novi artikal
 
         private void btnSacuvajNoviArtikal_Click(object sender, RoutedEventArgs e)
         {
+            string naziv, velicina, kolicina, cijena;
+            int indeksKategorije;
+            bool ispravno = true;
+            naziv = tbNaziv.Text;
+            velicina = tbVelicina.Text;
+            kolicina = tbKolicina.Text;
+            cijena = tbCijena.Text;
+            indeksKategorije = cbxKategorija.SelectedIndex;           
+            if (naziv.Length==0 || velicina.Length==0 || kolicina.Length==0 || cijena.Length==0 || nazivSlike.Length==0 || indeksKategorije < 0)
+            {
+                MessageBox.Show("Unesite sve podatke o artiklu!");
+            }
+            else
+            {
+                int kolicinaInt=0;
+                decimal cijenaDec=0;
+                ispravno=int.TryParse(kolicina, out kolicinaInt);
+                if (ispravno)
+                    ispravno = decimal.TryParse(cijena, out cijenaDec);
+                if (ispravno)
+                {
+                    artikal art = new artikal
+                    {
+                        naziv = naziv,
+                        velicina = velicina,
+                        kolicina = kolicinaInt,
+                        cijena = cijenaDec,
+                        kategorija = listaKategorija.Where(kategorija => kategorija.idkategorije == (indeksKategorije+1)).FirstOrDefault(),
+                        slika = putanjaZaSlike + "\\" + nazivSlike
+                    };
+                    var t = Task.Run(() => Utilities.CreateArtikalAsync(art));
+                    ponistiDodajNovi();
+                    MessageBox.Show("Uspješno ste unijeli artikal u sistem");
+                }
+                else
+                {
+                    MessageBox.Show("Unos artikla u sistem nije uspio");
+                }
+
+            }
 
         }
 
@@ -257,7 +346,7 @@ namespace GuiPrvaVerzija
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             {
-                openFileDialog.InitialDirectory = projectDirectory + "\\GuiPrvaVerzija\\odjeca";
+                openFileDialog.InitialDirectory = putanjaZaSlike;
                 openFileDialog.Filter = "All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
@@ -267,7 +356,8 @@ namespace GuiPrvaVerzija
                 if (result == true)
                 {
                     filePath = openFileDialog.SafeFileName;
-                    var uriSource = new Uri(@"/GuiPrvaVerzija;component/odjeca/" + filePath, UriKind.Relative);
+                    nazivSlike = filePath.ToString();
+                    var uriSource = new Uri(putanjaZaSlike +"\\"+ filePath, UriKind.Absolute);
                     Slika.Source = new BitmapImage(uriSource);
                 }
             }
@@ -300,7 +390,10 @@ namespace GuiPrvaVerzija
                 int index = a.kategorija.idkategorije - 1;
                 cbxKategorija2.SelectedIndex = index;
                 btnSlika2.IsEnabled = true;
-                //btnSlika2 source treba da se uradi
+                var uriSource = new Uri(a.slika, UriKind.Absolute);
+                Slika2.Source = new BitmapImage(uriSource);
+                nazivSlike = a.slika;
+                aZaIzmjenu = a;
             }
 
 
@@ -309,12 +402,72 @@ namespace GuiPrvaVerzija
 
         private void btnSlika2_Click(object sender, RoutedEventArgs e)
         {
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
 
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            {
+                openFileDialog.InitialDirectory = putanjaZaSlike;
+                openFileDialog.Filter = "All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                Nullable<bool> result = openFileDialog.ShowDialog();
+
+                if (result == true)
+                {
+                    filePath = openFileDialog.SafeFileName;
+                    nazivSlike = filePath.ToString();
+                    var uriSource = new Uri(putanjaZaSlike + "\\" + filePath, UriKind.Absolute);
+                    Slika2.Source = new BitmapImage(uriSource);
+                    nazivSlike = putanjaZaSlike + "\\" + nazivSlike;
+                }
+            }
         }
 
         private void btnSacuvajNoviArtikal2_Click(object sender, RoutedEventArgs e)
         {
+            string naziv, velicina, kolicina, cijena;
+            int indeksKategorije;
+            bool ispravno = true;
+            naziv = tbNaziv2.Text;
+            velicina = tbVelicina2.Text;
+            kolicina = tbKolicina2.Text;
+            cijena = tbCijena2.Text;
+            indeksKategorije = cbxKategorija2.SelectedIndex;
+            if (naziv.Length == 0 || velicina.Length == 0 || kolicina.Length == 0 || cijena.Length == 0 || nazivSlike.Length == 0 || indeksKategorije < 0)
+            {
+                MessageBox.Show("Unesite sve podatke o artiklu!");
+            }
+            else
+            {
+                int kolicinaInt = 0;
+                decimal cijenaDec = 0;
+                ispravno = int.TryParse(kolicina, out kolicinaInt);
+                if (ispravno)
+                    ispravno = decimal.TryParse(cijena, out cijenaDec);
+                if (ispravno)
+                {
 
+                    aZaIzmjenu.naziv = naziv;
+                    aZaIzmjenu.velicina = velicina;
+                    aZaIzmjenu.kolicina = kolicinaInt;
+                    aZaIzmjenu.cijena = cijenaDec;
+                    aZaIzmjenu.kategorija = listaKategorija.Where(kategorija => kategorija.idkategorije == (indeksKategorije + 1)).FirstOrDefault();
+                    aZaIzmjenu.slika = nazivSlike;
+                    
+                    var t = Task.Run(() => Utilities.UpdateArtikalAsync(aZaIzmjenu));
+                    ponistiIzmjenu();
+                    MessageBox.Show("Uspješno ste izmjenili artikal u sistem");
+                }
+                else
+                {
+                    MessageBox.Show("Izmjena artikla u sistem nije uspjela");
+                }
+
+            }
         }
 
 

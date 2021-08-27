@@ -40,15 +40,15 @@
                 HeadersVisibility="All" IsReadOnly="True" AutoGenerateColumns="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                   HorizontalAlignment="Left" Width="470" Height="200" FontSize="14">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Šifra" Binding="{Binding sifra}" Width="100"/>
-                    <DataGridTextColumn Header="Naziv" Binding="{Binding naziv}" Width="150"/>
-                    <DataGridTextColumn Header="Količina" Binding="{Binding kolicina}" Width="70"/>
-                    <DataGridTextColumn Header="Cijena" Binding="{Binding cijena}" Width="70"/>
+                    <DataGridTextColumn Header="Šifra" Binding="{Binding artikal.sifra}" Width="100"/>
+                    <DataGridTextColumn Header="Naziv" Binding="{Binding artikal.naziv}" Width="150"/>
+                    <DataGridTextColumn Header="Količina" Binding="{Binding artikal.kolicina}" Width="70"/>
+                    <DataGridTextColumn Header="Cijena" Binding="{Binding artikal.cijena}" Width="70"/>
                     <DataGridTextColumn Header="Ukupno" Width="80" >
                         <DataGridTextColumn.Binding>
                             <MultiBinding Converter="{StaticResource UkupnaCijenaConvertor}">
-                                <Binding Path="kolicina"/>
-                                <Binding Path="cijena" />
+                                <Binding Path="artikal.kolicina"/>
+                                <Binding Path="artikal.cijena" />
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>

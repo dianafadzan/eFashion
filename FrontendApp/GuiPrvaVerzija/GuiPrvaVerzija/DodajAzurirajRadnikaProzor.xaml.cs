@@ -20,6 +20,8 @@ namespace GuiPrvaVerzija
     public partial class DodajAzurirajRadnikaProzor : Window
     {
         bool novi = false;
+        radnik rad;
+        bool admin;
         public DodajAzurirajRadnikaProzor()
         {
             novi = true;
@@ -31,13 +33,21 @@ namespace GuiPrvaVerzija
         private async void inicijalizacija()
         {
             lista = await Utilities.GetAdministratoriAsync("http://localhost:9000/administratori");
+            foreach (var a in lista)
+                if (a.radnik.jmb.Equals(rad.jmb))
+                {
+                    cbAdmin.IsChecked = true;
+                    admin = true;
+                }
         }
         public DodajAzurirajRadnikaProzor(radnik r)
         {
             novi = false;
             InitializeComponent();
             tbNaslov.Text = "Ažuriraj podatke o radniku";
+            rad = r;
             inicijalizacija();
+            
             
             tbJmb.Text=r.jmb;
             tbIme.Text = r.ime;
@@ -73,38 +83,85 @@ namespace GuiPrvaVerzija
             }
             else
             {
-                decimal plataD = Decimal.Parse(plata);
-                if (novi)
+                decimal plataD;
+                if (decimal.TryParse(plata, out plataD))
                 {
-                    if (lozinka.Length == 0)
-                        MessageBox.Show("Popunite sva polja");
-                    else {
+                    if (novi)
+                    {
+                        if (lozinka.Length == 0)
+                            MessageBox.Show("Popunite sva polja");
+                        else
+                        {
+                            int akt = 0;
+                            if (isAktiv)
+                                akt = 1;
+                            radnik r = new radnik
+                            {
+                                jmb = jmb,
+                                ime = ime,
+                                prezime = prezime,
+                                username = username,
+                                plata = plataD,
+                                aktivan = akt,
+                                lozinka = Utilities.GetSHA256(lozinka)
+                            };
+                            var t = Task.Run(() => Utilities.CreateRadnikAsync(r));
+                            if (isAdmin)
+                            {
+                                administrator a = new administrator
+                                {
+                                    radnik_jmb = r.jmb,
+                                    radnik = r
+                                };
+                                var t2 = Task.Run(() => Utilities.CreateAdministratorAsync(a));
+                                MessageBox.Show("Uspjesno ste dodali novog administratora u sistem.");
+                            }
+                            else
+                                MessageBox.Show("Uspjesno ste dodali novog radnika u sistem.");
+                            this.Hide();
+
+                        }
+                        
+                    }
+                    else
+                    {
                         int akt = 0;
                         if (isAktiv)
                             akt = 1;
-                        radnik r = new radnik
+                        rad.jmb = jmb;
+                        rad.ime = ime;
+                        rad.prezime = prezime;
+                        rad.username = username;
+                        rad.plata = plataD;
+                        rad.aktivan = akt;
+                        if (lozinka.Length != 0)
+                            rad.lozinka = Utilities.GetSHA256(lozinka);
+                        var t = Task.Run(() => Utilities.UpdateRadnikAsync(rad));
+                        if (!admin && isAdmin)
                         {
-                            jmb = jmb,
-                            ime = ime,
-                            prezime = prezime,
-                            username = username,
-                            plata = plataD,
-                            aktivan = akt,
-                        //lozinka = MainWindow.GetSHA256(lozinka)
-                    };
-
-                }
-                }
-                else
-                {
-
+                            //ne prolazi kako treba
+                            administrator a = new administrator
+                            {
+                                radnik_jmb = rad.jmb,
+                                radnik = rad
+                            };
+                            var t2 = Task.Run(() => Utilities.CreateAdministratorAsync(a));
+                        }
+                        if(admin && !isAdmin)
+                        {
+                            //treba uraditi delete admina
+                        }
+                        MessageBox.Show("Uspjesno ste promjenili podatke o radniku ");
+                        this.Hide();
+                    }
+                    
                 }
             }
         }
 
         private void btnOdbaci_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Hide();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

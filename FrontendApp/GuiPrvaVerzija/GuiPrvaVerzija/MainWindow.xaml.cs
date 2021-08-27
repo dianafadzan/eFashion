@@ -49,10 +49,33 @@ namespace GuiPrvaVerzija
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            new AdminastrorPocetniProzor(null).Show();
-            
-            this.Hide();
+
+            String username = tbUsername.Text;
+            String password = Utilities.GetSHA256(pbSifra.Password);
+            var administratori = await Utilities.GetAdministratoriAsync("http://localhost:9000/administratori");
+            bool pronadjen = false;
+            administrator praviAdmin = null;
+            foreach (var admin in administratori)
+            {
+                if (admin.radnik.username.Equals(username) && admin.radnik.lozinka.Equals(password))
+                {
+                    pronadjen = true;
+                    praviAdmin = admin;
+                }
+            }
+            if (pronadjen)
+            {
+                new AdminastrorPocetniProzor(praviAdmin).Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Ne postoji administrator sa tim kredencijalima");
+                tbUsername.Text = "";
+                pbSifra.Password = "";
+            }
+
+        
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-
+using System.Security.Cryptography;
 
 namespace GuiPrvaVerzija
 {
@@ -546,6 +546,14 @@ namespace GuiPrvaVerzija
 
         }
 
-        
+
+        public static string GetSHA256(string password)
+        {
+            using (var sha256 = new SHA256Managed())
+            {
+                return BitConverter.ToString(sha256.ComputeHash(Encoding.UTF8.GetBytes(password))).Replace("-", "").ToLower();
+            }
+        }
+
     }
 }
