@@ -39,7 +39,7 @@ public class StavkaController {
     }
 
     @PutMapping("/{idRacuna}/{artikalSifra}")
-    public StavkaEntity updateStavka(@PathVariable Integer idRacuna,Integer artikalSifra,@RequestBody StavkaEntity stavka){
+    public StavkaEntity updateStavka(@PathVariable Integer idRacuna,@PathVariable Integer artikalSifra,@RequestBody StavkaEntity stavka){
         StavkaEntity s=repository.getByRacunIdracunaAndArtikalSifra(idRacuna, artikalSifra);
         if(s!=null){
             stavka.setRacunIdracuna(s.getRacunIdracuna());

@@ -11,15 +11,6 @@ namespace GuiPrvaVerzija
         public int idkategorije { get; set; }
         public string naziv { get; set; }
 
-        /*
-        public kategorija(int idkategorije, string naziv)
-        {
-            this.idkategorije = idkategorije;
-            this.naziv = naziv;
-        }
-
-        public int Idkategorije { get => idkategorije; set => idkategorije = value; }
-        public string Naziv { get => naziv; set => naziv = value; }
-        */
+       
     }
 }

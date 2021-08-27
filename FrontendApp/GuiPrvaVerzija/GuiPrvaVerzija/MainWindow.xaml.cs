@@ -51,10 +51,23 @@ namespace GuiPrvaVerzija
         {
             
             new AdminastrorPocetniProzor().Show();
-            var k = await Utilities.GetRacunAsync("http://localhost:9000/racuni/1");           
-            k.ukupno = 30.00;
-            Console.WriteLine(k.ukupno);
-            var t = Task.Run(() => Utilities.UpdateRacunAsync(k));
+            /*var r = await Utilities.GetRadnikAsync("http://localhost:9000/racuni/1");
+            var k = new racun
+            {
+                idracuna = 6,
+                datum = DateTime.Now,
+                ukupno = 60.00M,
+                radnik = r
+            };
+            var t = Task.Run(() => Utilities.CreateRacunAsync(k)); */
+
+            //var s = await Utilities.GetStavkeAsync("http://localhost:9000/stavke");
+            //Console.WriteLine("Stavka: "+s[0].artikal_sifra);
+            //Console.WriteLine(t.Result);
+            var r = await Utilities.GetStavkaAsync("http://localhost:9000/stavke/1/2");
+            r.kolicina = 20;           
+            Console.WriteLine(r.racunIdracuna + "kolicina "+r.kolicina);
+            var t = Task.Run(() => Utilities.UpdateStavkaAsync(r));
             Console.WriteLine(t.Result);
             this.Hide();
         }

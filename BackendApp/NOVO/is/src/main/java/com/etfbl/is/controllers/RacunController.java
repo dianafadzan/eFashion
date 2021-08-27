@@ -57,6 +57,7 @@ public class RacunController {
         }
     }
 
+
     @PutMapping("/{id}")
     public RacunEntity updateRacun(@PathVariable Integer id,@RequestBody RacunEntity racun){
         RacunEntity r=repository.getByIdracuna(id);
@@ -67,4 +68,6 @@ public class RacunController {
         }
         return null;
     }
+
+
 }

@@ -15,4 +15,6 @@ insert into radnik (jmb, ime, prezime, username, lozinka, plata, aktivan) values
 
 insert into administrator (radnik_jmb) values ('1234567890001');
 
+insert into stavka (racun_idracuna, artikal_sifra, kolicina, cijena) values (1, 2, 1, 20.00);
+
 

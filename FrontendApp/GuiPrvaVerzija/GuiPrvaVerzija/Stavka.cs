@@ -8,20 +8,13 @@ namespace GuiPrvaVerzija
 {
     public class stavka
     {
-        public int racun_idracuna { get; set; }
-        public string artikal_sifra { get; set; }
+        public int racunIdracuna { get; set; }
+        public int artikalSifra { get; set; }
         public int kolicina { get; set; }
         public decimal cijena { get; set; }
-
-        /*
-        public stavka(int racun_idracuna, string artikal_sifra, int kolicina, decimal cijena)
-        {
-            this.racun_idracuna = racun_idracuna;
-            this.artikal_sifra = artikal_sifra;
-            this.kolicina = kolicina;
-            this.cijena = cijena;
-        }
-
-        */
+        public racun racun { get; set; }
+        public artikal artikal { get; set; }
+        
+        
     }
 }
