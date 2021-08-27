@@ -85,7 +85,7 @@ namespace GuiPrvaVerzija
             if (!VecPokrenuto)
             {
                 MovePocetniCanvas();
-                await Task.Delay(2000);
+                await Task.Delay(1000);
                 VecPokrenuto = true;
             }
             UnosRobeCanvas.Visibility = Visibility.Visible;
@@ -102,7 +102,7 @@ namespace GuiPrvaVerzija
             if (!VecPokrenuto)
             {
                 MovePocetniCanvas();
-                await Task.Delay(2000);
+                await Task.Delay(1000);
                 VecPokrenuto = true;
             }
             IzmjenaBazeArtikalaCanvas.Visibility = Visibility.Visible;
@@ -118,7 +118,7 @@ namespace GuiPrvaVerzija
             if (!VecPokrenuto)
             {
                 MovePocetniCanvas();
-                await Task.Delay(2000);
+                await Task.Delay(1000);
                 VecPokrenuto = true;
             }
             PregledRacunaCanvas.Visibility = Visibility.Visible;
@@ -133,7 +133,7 @@ namespace GuiPrvaVerzija
             if (!VecPokrenuto)
             {
                 MovePocetniCanvas();
-                await Task.Delay(2000);
+                await Task.Delay(1000);
                 VecPokrenuto = true;
             }
             PregledProdajeCanvas.Visibility = Visibility.Visible;
@@ -161,7 +161,7 @@ namespace GuiPrvaVerzija
             if (!VecPokrenuto)
             {
                 MovePocetniCanvas();
-                await Task.Delay(2000);
+                await Task.Delay(1000);
                 VecPokrenuto = true;
             }
             PregledZaradeCanvas.Visibility = Visibility.Visible;
@@ -174,14 +174,14 @@ namespace GuiPrvaVerzija
             if (!VecPokrenuto)
             {
                 MovePocetniCanvas();
-                await Task.Delay(2000);
+                await Task.Delay(1000);
                 VecPokrenuto = true;
             }
             ZaposleniCanvas.Visibility = Visibility.Visible;
             radniciUTabeli = new List<radnik>();
             foreach(radnik r in listaRadnika)
             {
-                if (r.aktivan)
+                if (r.aktivan!=0)
                     radniciUTabeli.Add(r);
             }
             ZaposleniTable.ItemsSource = radniciUTabeli;
@@ -194,43 +194,43 @@ namespace GuiPrvaVerzija
         {
             TranslateTransform trans1 = new TranslateTransform();
             btnDodajRobu.RenderTransform = trans1;
-            DoubleAnimation btn1X_anim = new DoubleAnimation(0, -90, TimeSpan.FromSeconds(2));
-            DoubleAnimation btn1Y_anim = new DoubleAnimation(0, -190, TimeSpan.FromSeconds(2));
+            DoubleAnimation btn1X_anim = new DoubleAnimation(0, -90, TimeSpan.FromSeconds(1));
+            DoubleAnimation btn1Y_anim = new DoubleAnimation(0, -190, TimeSpan.FromSeconds(1));
             trans1.BeginAnimation(TranslateTransform.XProperty, btn1X_anim);
             trans1.BeginAnimation(TranslateTransform.YProperty, btn1Y_anim);
 
             TranslateTransform trans2 = new TranslateTransform();
             btnIzmjeniBazu.RenderTransform = trans2;
-            DoubleAnimation btn2X_anim = new DoubleAnimation(0, -510, TimeSpan.FromSeconds(2));
-            DoubleAnimation btn2Y_anim = new DoubleAnimation(0, -105, TimeSpan.FromSeconds(2));
+            DoubleAnimation btn2X_anim = new DoubleAnimation(0, -510, TimeSpan.FromSeconds(1));
+            DoubleAnimation btn2Y_anim = new DoubleAnimation(0, -105, TimeSpan.FromSeconds(1));
             trans2.BeginAnimation(TranslateTransform.XProperty, btn2X_anim);
             trans2.BeginAnimation(TranslateTransform.YProperty, btn2Y_anim);
 
             TranslateTransform trans3 = new TranslateTransform();
             btnPregledArt.RenderTransform = trans3;
-            DoubleAnimation btn3X_anim = new DoubleAnimation(0, -90, TimeSpan.FromSeconds(2));
-            DoubleAnimation btn3Y_anim = new DoubleAnimation(0, -120, TimeSpan.FromSeconds(2));
+            DoubleAnimation btn3X_anim = new DoubleAnimation(0, -90, TimeSpan.FromSeconds(1));
+            DoubleAnimation btn3Y_anim = new DoubleAnimation(0, -120, TimeSpan.FromSeconds(1));
             trans3.BeginAnimation(TranslateTransform.XProperty, btn3X_anim);
             trans3.BeginAnimation(TranslateTransform.YProperty, btn3Y_anim);
 
             TranslateTransform trans4 = new TranslateTransform();
             btnPregledRacuna.RenderTransform = trans4;
-            DoubleAnimation btn4X_anim = new DoubleAnimation(0, -510, TimeSpan.FromSeconds(2));
-            DoubleAnimation btn4Y_anim = new DoubleAnimation(0, -35, TimeSpan.FromSeconds(2));
+            DoubleAnimation btn4X_anim = new DoubleAnimation(0, -510, TimeSpan.FromSeconds(1));
+            DoubleAnimation btn4Y_anim = new DoubleAnimation(0, -35, TimeSpan.FromSeconds(1));
             trans4.BeginAnimation(TranslateTransform.XProperty, btn4X_anim);
             trans4.BeginAnimation(TranslateTransform.YProperty, btn4Y_anim);
 
             TranslateTransform trans5 = new TranslateTransform();
             btnPregledZarade.RenderTransform = trans5;
-            DoubleAnimation btn5X_anim = new DoubleAnimation(0, -90, TimeSpan.FromSeconds(2));
-            DoubleAnimation btn5Y_anim = new DoubleAnimation(0, -50, TimeSpan.FromSeconds(2));
+            DoubleAnimation btn5X_anim = new DoubleAnimation(0, -90, TimeSpan.FromSeconds(1));
+            DoubleAnimation btn5Y_anim = new DoubleAnimation(0, -50, TimeSpan.FromSeconds(1));
             trans5.BeginAnimation(TranslateTransform.XProperty, btn5X_anim);
             trans5.BeginAnimation(TranslateTransform.YProperty, btn5Y_anim);
 
             TranslateTransform trans6 = new TranslateTransform();
             btnIzmjenaZaposlenih.RenderTransform = trans6;
-            DoubleAnimation btn6X_anim = new DoubleAnimation(0, -510, TimeSpan.FromSeconds(2));
-            DoubleAnimation btn6Y_anim = new DoubleAnimation(0, 35, TimeSpan.FromSeconds(2));
+            DoubleAnimation btn6X_anim = new DoubleAnimation(0, -510, TimeSpan.FromSeconds(1));
+            DoubleAnimation btn6Y_anim = new DoubleAnimation(0, 35, TimeSpan.FromSeconds(1));
             trans6.BeginAnimation(TranslateTransform.XProperty, btn6X_anim);
             trans6.BeginAnimation(TranslateTransform.YProperty, btn6Y_anim);
 
@@ -434,12 +434,12 @@ namespace GuiPrvaVerzija
             {
                 if (selectIndex == 0)
                 {
-                    if (r.aktivan)
+                    if (r.aktivan!=0)
                         radniciUTabeli.Add(r);                   
                 }
                 else
                 {
-                    if (!r.aktivan)
+                    if (r.aktivan==0)
                         radniciUTabeli.Add(r);
                 }
             }
@@ -464,12 +464,12 @@ namespace GuiPrvaVerzija
                 {
                     if (selectIndex == 0)
                     {
-                        if (r.aktivan)
+                        if (r.aktivan!=0)
                             radniciUTabeli.Add(r);
                     }
                     else
                     {
-                        if (!r.aktivan)
+                        if (r.aktivan==0)
                             radniciUTabeli.Add(r);
                     }
                 }
@@ -488,12 +488,12 @@ namespace GuiPrvaVerzija
                 {
                     if (selectIndex == 0)
                     {
-                        if (r.radnik.aktivan)
+                        if (r.radnik.aktivan!=0)
                             radniciUTabeli.Add(r.radnik);
                     }
                     else
                     {
-                        if (!r.radnik.aktivan)
+                        if (r.radnik.aktivan==0)
                             radniciUTabeli.Add(r.radnik);
                     }
                 }
@@ -508,14 +508,14 @@ namespace GuiPrvaVerzija
             if (selectIndex == 0)
             {
                 foreach (radnik r in listaRadnika)
-                    if (r.aktivan)
+                    if (r.aktivan!=0)
                         radniciUTabeli.Add(r);
             }else if (selectIndex == 1)
             {
                 bool pronadjen = false;
                 foreach(radnik r in listaRadnika)
                 {
-                    if (r.aktivan)
+                    if (r.aktivan!=0)
                     {
                         pronadjen = false;
                         foreach (var a in listaAdministratora)
@@ -529,7 +529,7 @@ namespace GuiPrvaVerzija
             else
             {
                 foreach (var a in listaAdministratora)
-                    if (a.radnik.aktivan)
+                    if (a.radnik.aktivan!=0)
                         radniciUTabeli.Add(a.radnik);
             }
             ZaposleniTable.ItemsSource = radniciUTabeli;
@@ -542,7 +542,7 @@ namespace GuiPrvaVerzija
             if (selectIndex == 0)
             {
                 foreach (radnik r in listaRadnika)
-                    if (!r.aktivan)
+                    if (r.aktivan==0)
                         radniciUTabeli.Add(r);
             }
             else if (selectIndex == 1)
@@ -550,7 +550,7 @@ namespace GuiPrvaVerzija
                 bool pronadjen = false;
                 foreach (radnik r in listaRadnika)
                 {
-                    if (!r.aktivan)
+                    if (r.aktivan==0)
                     {
                         pronadjen = false;
                         foreach (var a in listaAdministratora)
@@ -564,7 +564,7 @@ namespace GuiPrvaVerzija
             else
             {
                 foreach (var a in listaAdministratora)
-                    if (!a.radnik.aktivan)
+                    if (a.radnik.aktivan==0)
                         radniciUTabeli.Add(a.radnik);
             }
             ZaposleniTable.ItemsSource = radniciUTabeli;

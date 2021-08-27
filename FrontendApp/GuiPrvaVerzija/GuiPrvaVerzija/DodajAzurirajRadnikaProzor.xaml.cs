@@ -44,7 +44,7 @@ namespace GuiPrvaVerzija
             tbPrezime.Text = r.prezime;
             tbUsername.Text = r.username;
             tbPlata.Text=r.plata.ToString();
-            if(r.aktivan)
+            if(r.aktivan!=0)
                 cbAktivan.IsChecked = true;
             bool pronadjen = false;
             foreach (var l in lista)
@@ -78,17 +78,22 @@ namespace GuiPrvaVerzija
                 {
                     if (lozinka.Length == 0)
                         MessageBox.Show("Popunite sva polja");
-                    radnik r = new radnik
-                    {
-                        jmb = jmb,
-                        ime = ime,
-                        prezime = prezime,
-                        username = username,
-                        plata = plataD,
-                        aktivan = isAktiv,
-                        lozinka = MainWindow.GetSHA256(lozinka)
+                    else {
+                        int akt = 0;
+                        if (isAktiv)
+                            akt = 1;
+                        radnik r = new radnik
+                        {
+                            jmb = jmb,
+                            ime = ime,
+                            prezime = prezime,
+                            username = username,
+                            plata = plataD,
+                            aktivan = akt,
+                        //lozinka = MainWindow.GetSHA256(lozinka)
                     };
 
+                }
                 }
                 else
                 {
