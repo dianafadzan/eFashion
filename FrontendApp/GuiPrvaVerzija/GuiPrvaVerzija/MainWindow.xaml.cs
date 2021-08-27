@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.Net.Http;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
+
 
 namespace GuiPrvaVerzija
 {
@@ -47,44 +47,29 @@ namespace GuiPrvaVerzija
             Environment.Exit(0);
         }
 
-
-        public static string GetSHA256(string password)
-        {
-            using (var sha256 = new SHA256Managed())
-            {
-                return BitConverter.ToString(sha256.ComputeHash(Encoding.UTF8.GetBytes(password))).Replace("-", "").ToLower();
-            }
-        }
-
-
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            String username = tbUsername.Text;
-            String password = GetSHA256(pbSifra.Password);
-            var administratori = await Utilities.GetAdministratoriAsync("http://localhost:9000/administratori");
-            bool pronadjen = false;
-            administrator praviAdmin = null;
-            foreach(var admin in administratori)
-            {
-                if(admin.radnik.username.Equals(username) && admin.radnik.lozinka.Equals(password))
-                {
-                    pronadjen = true;
-                    praviAdmin = admin;
-                }
-            }
-            if (pronadjen)
-            {
-                new AdminastrorPocetniProzor(praviAdmin).Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Ne postoji administrator sa tim kredencijalima");
-                tbUsername.Text = "";
-                pbSifra.Password = "";
-            }
             
+            new AdminastrorPocetniProzor().Show();
+            /*var r = await Utilities.GetRadnikAsync("http://localhost:9000/racuni/1");
+            var k = new racun
+            {
+                idracuna = 6,
+                datum = DateTime.Now,
+                ukupno = 60.00M,
+                radnik = r
+            };
+            var t = Task.Run(() => Utilities.CreateRacunAsync(k)); */
+
+            //var s = await Utilities.GetStavkeAsync("http://localhost:9000/stavke");
+            //Console.WriteLine("Stavka: "+s[0].artikal_sifra);
+            //Console.WriteLine(t.Result);
+            var r = await Utilities.GetStavkaAsync("http://localhost:9000/stavke/1/2");
+            r.kolicina = 20;           
+            Console.WriteLine(r.racunIdracuna + "kolicina "+r.kolicina);
+            var t = Task.Run(() => Utilities.UpdateStavkaAsync(r));
+            Console.WriteLine(t.Result);
+            this.Hide();
         }
     }
 }

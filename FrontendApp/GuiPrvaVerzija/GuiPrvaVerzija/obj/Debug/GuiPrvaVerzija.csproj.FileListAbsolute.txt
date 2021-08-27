@@ -24,29 +24,43 @@ C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\
 C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.csproj.CopyComplete
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\GuiPrvaVerzija.exe.config
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\GuiPrvaVerzija.exe
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\GuiPrvaVerzija.pdb
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.csprojAssemblyReference.cache
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\AdminastrorPocetniProzor.g.cs
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\DodajAzurirajRadnikaProzor.g.cs
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\MainWindow.g.cs
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\PregledRacunaProzor.g.cs
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\App.g.cs
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija_MarkupCompile.cache
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija_MarkupCompile.lref
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\App.baml
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\AdminastrorPocetniProzor.baml
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\DodajAzurirajRadnikaProzor.baml
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\MainWindow.baml
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\PregledRacunaProzor.baml
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.g.resources
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.Properties.Resources.resources
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.csproj.GenerateResource.cache
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.csproj.CoreCompileInputs.cache
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.csproj.CopyComplete
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.exe
-C:\Users\Acer ES1\Desktop\FAKULTET\4 godina\InformacioniSistemi\Projekat\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\obj\Debug\GuiPrvaVerzija.pdb
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Configuration.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Primitives.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Buffers.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Memory.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Text.Json.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.ValueTuple.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Configuration.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Configuration.FileExtensions.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Configuration.Json.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.FileProviders.Abstractions.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.FileProviders.Physical.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.FileSystemGlobbing.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.Extensions.Primitives.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Buffers.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Memory.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Text.Json.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\System.ValueTuple.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Users\Korisnik\Desktop\eFashion\Word.lnk\eFashion\FrontendApp\GuiPrvaVerzija\GuiPrvaVerzija\bin\Debug\Microsoft.IdentityModel.Tokens.xml

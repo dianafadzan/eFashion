@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
@@ -386,7 +387,7 @@ namespace GuiPrvaVerzija
             }
         }
 
-        public static async Task<String> CreateStavkaAsync(stavka product)
+        public static async Task<string> CreateStavkaAsync(stavka product)
         {
             var response = string.Empty;
             try
@@ -418,43 +419,133 @@ namespace GuiPrvaVerzija
             }
         }
 
-        public static async Task<String> UpdateRacunAsync(racun product)
+        public static async Task<string> UpdateArtikalAsync(artikal product)
         {
-            Uri u = new Uri("http://localhost:9000/racuni/"+product.idracuna);
-            string strPayload = JsonConvert.SerializeObject(product);
-            HttpContent content = new StringContent(strPayload, Encoding.UTF8, "application/json");
-            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await client.PutAsync(u, content);
-            string result = await response.Content.ReadAsStringAsync();
-            return result;
+            var response = string.Empty;
+            try
+            {
+                Uri u = new Uri("http://localhost:9000/artikli/"+product.sifra);
+                string str = JsonConvert.SerializeObject(product);               
+                HttpContent c = new StringContent(str, Encoding.UTF8, "application/json");              
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Put,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }              
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return response;
+            }
+
         }
 
-
-
-
-        /*
-
-        public static async Task<string> UpdateProductAsync(racun product)
+        public static async Task<string> UpdateRadnikAsync(radnik product)
         {
+            var response = string.Empty;
+            try
+            {
+                Uri u = new Uri("http://localhost:9000/radnici/" + product.jmb);
+                string str = JsonConvert.SerializeObject(product);
+                HttpContent c = new StringContent(str, Encoding.UTF8, "application/json");
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Put,
+                    RequestUri = u,
+                    Content = c
+                };
 
-            HttpResponseMessage response = await client.PutAsJsonAsync(
-                $"api/products/{product.Id}", product);
-            response.EnsureSuccessStatusCode();
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+               
+                return response;
+                
+            }
+            catch (Exception ex)
+            {
+                
+                return response;
+            }
 
-            // Deserialize the updated product from the response body.
-            product = await response.Content.ReadAsAsync<racun>();
-            return product;
+        }
+
+        public static async Task<string> UpdateRacunAsync(racun product)
+        {
+            var response = string.Empty;
+            try
+            {
+                Uri u = new Uri("http://localhost:9000/racuni/" + product.idracuna);
+                string str = JsonConvert.SerializeObject(product);
+                HttpContent c = new StringContent(str, Encoding.UTF8, "application/json");
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Put,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+                
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                
+                return response;
+            }
+
+        }
+
+        public static async Task<string> UpdateStavkaAsync(stavka product)
+        {
+            var response = string.Empty;
+            try
+            {
+                Uri u = new Uri("http://localhost:9000/stavke/" + product.racunIdracuna+"/"+product.artikalSifra);
+                string str = JsonConvert.SerializeObject(product);
+                HttpContent c = new StringContent(str, Encoding.UTF8, "application/json");
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Put,
+                    RequestUri = u,
+                    Content = c
+                };
+
+                HttpResponseMessage result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    response = result.StatusCode.ToString();
+                }
+                
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                
+                return response;
+            }
+
         }
 
         
-
-        public static async Task<HttpStatusCode> DeleteProductAsync(string id)
-        {
-            HttpResponseMessage response = await client.DeleteAsync(
-                $"api/products/{id}");
-            return response.StatusCode;
-        }
-
-        */
     }
 }
