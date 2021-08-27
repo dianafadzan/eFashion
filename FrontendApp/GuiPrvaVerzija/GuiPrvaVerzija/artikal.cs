@@ -14,7 +14,7 @@ namespace GuiPrvaVerzija
         public int kolicina { get; set; }
         public decimal cijena { get; set; }
         public string slika { get; set; }
-        public int kategorija_idkategorije { get; set; }
+        public kategorija kategorija { get; set; }
 
         /*
         public artikal(int sifra, string naziv, string velicina, int kolicina, decimal cijena, string slika, int kategorija_idkategorije)

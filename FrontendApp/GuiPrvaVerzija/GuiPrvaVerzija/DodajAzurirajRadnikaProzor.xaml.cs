@@ -19,37 +19,82 @@ namespace GuiPrvaVerzija
     /// </summary>
     public partial class DodajAzurirajRadnikaProzor : Window
     {
+        bool novi = false;
         public DodajAzurirajRadnikaProzor()
         {
+            novi = true;
             InitializeComponent();
             tbNaslov.Text = "Dodaj novog radnika";
         }
 
-        //ovdje treba radnik Radnik
-        public DodajAzurirajRadnikaProzor(String Radnik)
+        List<administrator> lista = new List<administrator>();
+        private async void inicijalizacija()
         {
+            lista = await Utilities.GetAdministratoriAsync("http://localhost:9000/administratori");
+        }
+        public DodajAzurirajRadnikaProzor(radnik r)
+        {
+            novi = false;
             InitializeComponent();
             tbNaslov.Text = "Ažuriraj podatke o radniku";
-
-            /*
-            tbJmb.Text=Radnik.jmb;
-            tbIme.Text = Radnik.ime;
-            tbPrezime.Text = Radnik.prezime;
-            tbUsername.Text = Radnik.username;
-            tbPlata.Text=Radnik.plata.ToString();
-            if(radnik.aktivan)
+            inicijalizacija();
+            
+            tbJmb.Text=r.jmb;
+            tbIme.Text = r.ime;
+            tbPrezime.Text = r.prezime;
+            tbUsername.Text = r.username;
+            tbPlata.Text=r.plata.ToString();
+            if(r.aktivan)
                 cbAktivan.IsChecked = true;
-            if(radnik.Administrator) // ovo nisam siguran kako da uradim jer nemam bazu, pa to
-            malo skontaj
+            bool pronadjen = false;
+            foreach (var l in lista)
+                if (l.radnik.jmb.Equals(r.jmb))
+                    pronadjen = true;
+            if(pronadjen)
                 cbAdmin.IsChecked=true;
-            */
-            cbAktivan.IsChecked = true;
 
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            string jmb, ime, prezime, username, plata, lozinka;
+            bool isAdmin, isAktiv;
+            jmb = tbJmb.Text;
+            ime = tbIme.Text;
+            prezime = tbPrezime.Text;
+            username = tbUsername.Text;
+            plata = tbPlata.Text;
+            lozinka = tbPassword.Password;
+            isAdmin = (bool)cbAdmin.IsChecked;
+            isAktiv = (bool)cbAktivan.IsChecked;
+            if (jmb.Length == 0 || ime.Length == 0 || prezime.Length == 0 || username.Length == 0 || plata.Length == 0)
+            {
+                MessageBox.Show("Popunite sva polja");
+            }
+            else
+            {
+                decimal plataD = Decimal.Parse(plata);
+                if (novi)
+                {
+                    if (lozinka.Length == 0)
+                        MessageBox.Show("Popunite sva polja");
+                    radnik r = new radnik
+                    {
+                        jmb = jmb,
+                        ime = ime,
+                        prezime = prezime,
+                        username = username,
+                        plata = plataD,
+                        aktivan = isAktiv,
+                        lozinka = MainWindow.GetSHA256(lozinka)
+                    };
 
+                }
+                else
+                {
+
+                }
+            }
         }
 
         private void btnOdbaci_Click(object sender, RoutedEventArgs e)

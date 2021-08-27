@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GuiPrvaVerzija
 {
-    class racun
+    public class racun
     {
         public int idracuna { get; set; }
         public DateTime datum { get; set; }
