@@ -27,7 +27,7 @@
             <TextBox x:Name="tbUsername" Focusable="True" Width="304" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25"   />
 
             <TextBlock Text="Password" Margin="15 20 0 0" FontSize="30" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121"/>
-            <PasswordBox Width="304" Height="35" HorizontalAlignment="Center" FontSize="25" Foreground="#264143" Background="#f2ebe9 " PasswordChar="*" Margin="0 0 0 20" />
+            <PasswordBox x:Name="pbSifra" Width="304" Height="35" HorizontalAlignment="Center" FontSize="25" Foreground="#264143" Background="#f2ebe9 " PasswordChar="*" Margin="0 0 0 20" />
 
             <Button Click="Button_Click" Content="LOGIN"  Foreground="#264143"  FontFamily="Bodoni Bk BT" FontSize="25" Width="140" Height="40" Margin="0 35 0 0"  BorderThickness="0" BorderBrush="#de5499" />
 

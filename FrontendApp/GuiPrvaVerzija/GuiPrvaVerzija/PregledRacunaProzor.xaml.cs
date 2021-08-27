@@ -19,19 +19,15 @@ namespace GuiPrvaVerzija
     /// </summary>
     public partial class PregledRacunaProzor : Window
     {
-        public PregledRacunaProzor()
+        public PregledRacunaProzor(racun r)
         {
             InitializeComponent();
-            /*racun racun = new Racun(7);
-            tbSifra.Text = racun.id;
-            tbIme.Text = racun.id;
-            tbDatum.Text = racun.id;
-            double ukupno = 0.0;
-            foreach(var stavka in racun.niz)
-            {
-                ukupno += (stavka.kolicina * stavka.cijena);
-            }
-            tbUkupno.Text = ukupno.ToString()+" KM";
+            tbSifra.Text = r.idracuna+"";
+            tbIme.Text=r.radnik.ime+" "+r.radnik.prezime;
+            tbDatum.Text = r.datum.ToString("dd MM yyyy");
+            tbUkupno.Text = r.ukupno.ToString()+" KM";
+
+            /*
             RacunTable.ItemsSource = racun.niz;
             RacunTable.Items.Refresh();
             */

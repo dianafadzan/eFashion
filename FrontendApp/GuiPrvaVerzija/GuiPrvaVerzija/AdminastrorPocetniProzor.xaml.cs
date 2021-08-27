@@ -24,11 +24,32 @@ namespace GuiPrvaVerzija
     public partial class AdminastrorPocetniProzor : Window
     {
         private Boolean VecPokrenuto = false;
-        public AdminastrorPocetniProzor()
+
+
+        //lista racuna
+        List<racun> listaRacuna = new List<racun>();
+        List<kategorija> listaKategorija = new List<kategorija>();
+        List<radnik> listaRadnika = new List<radnik>();
+        List<administrator> listaAdministratora = new List<administrator>();
+        List<artikal> listaArtikala = new List<artikal>();
+
+        List<radnik> radniciUTabeli = new List<radnik>();
+
+        private async void inicijalizacija()
+        {
+            listaRacuna = await Utilities.GetRacuniAsync("http://localhost:9000/racuni");
+            listaKategorija = await Utilities.GetKategorijeAsync("http://localhost:9000/kategorije");
+            listaRadnika = await Utilities.GetRadniciAsync("http://localhost:9000/radnici");
+            listaAdministratora = await Utilities.GetAdministratoriAsync("http://localhost:9000/administratori");
+            listaArtikala = await Utilities.GetArtikliAsync("http://localhost:9000/artikli");
+
+        }
+        public AdminastrorPocetniProzor(administrator admin)
         {
             InitializeComponent();
             PocetniCanvas.Visibility = Visibility.Visible;
             HideAllCanvas();
+            inicijalizacija();
         }
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -66,8 +87,11 @@ namespace GuiPrvaVerzija
                 MovePocetniCanvas();
                 await Task.Delay(2000);
                 VecPokrenuto = true;
-            }            
+            }
             UnosRobeCanvas.Visibility = Visibility.Visible;
+            cbxKategorija.Items.Clear();
+            foreach (kategorija k in listaKategorija)
+                cbxKategorija.Items.Add(k.naziv);
 
         }
 
@@ -82,6 +106,9 @@ namespace GuiPrvaVerzija
                 VecPokrenuto = true;
             }
             IzmjenaBazeArtikalaCanvas.Visibility = Visibility.Visible;
+            cbxKategorija2.Items.Clear();
+            foreach (kategorija k in listaKategorija)
+                cbxKategorija2.Items.Add(k.naziv);
         }
 
         private async void btnPregledRacuna_Click(object sender, RoutedEventArgs e)
@@ -95,6 +122,8 @@ namespace GuiPrvaVerzija
                 VecPokrenuto = true;
             }
             PregledRacunaCanvas.Visibility = Visibility.Visible;
+            RacuniTabela4.ItemsSource = listaRacuna;
+            RacuniTabela4.Items.Refresh();
         }
 
         private async void btnPregledArt_Click(object sender, RoutedEventArgs e)
@@ -108,12 +137,21 @@ namespace GuiPrvaVerzija
                 VecPokrenuto = true;
             }
             PregledProdajeCanvas.Visibility = Visibility.Visible;
-            
-            
+
+
             dpDatumPoc.DisplayDate = DateTime.Today;
             dpDatumKraj.DisplayDate = DateTime.Today;
-            //popuniTabelu();
-            //treba povuci kategorije iz baze i staviti ih ovdje
+            //nije dobro popunjena tabela, artikli treba da se poredaju po broju prodanih artikala
+            //========================================
+            //=========================================
+            ProdajaTabela3.ItemsSource = listaArtikala;
+            ProdajaTabela3.Items.Refresh();
+
+            cbKategorija3.Items.Clear();
+            foreach (var kat in listaKategorija)
+            {
+                cbKategorija3.Items.Add(kat.naziv);
+            }
         }
 
         private async void btnPregledZarade_Click(object sender, RoutedEventArgs e)
@@ -140,6 +178,16 @@ namespace GuiPrvaVerzija
                 VecPokrenuto = true;
             }
             ZaposleniCanvas.Visibility = Visibility.Visible;
+            radniciUTabeli = new List<radnik>();
+            foreach(radnik r in listaRadnika)
+            {
+                if (r.aktivan)
+                    radniciUTabeli.Add(r);
+            }
+            ZaposleniTable.ItemsSource = radniciUTabeli;
+            ZaposleniTable.Items.Refresh();
+            cbAktivni.SelectedIndex = 0;
+            cbZaposleni.SelectedIndex = 0;
         }
 
         private void MovePocetniCanvas()
@@ -190,8 +238,8 @@ namespace GuiPrvaVerzija
             tbNazivApp.Visibility = Visibility.Visible;
         }
 
-        
-        
+
+
         //Canvas Dodaj novi artikal
 
         private void btnSacuvajNoviArtikal_Click(object sender, RoutedEventArgs e)
@@ -209,7 +257,7 @@ namespace GuiPrvaVerzija
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             {
-                openFileDialog.InitialDirectory = projectDirectory+"\\GuiPrvaVerzija\\odjeca";
+                openFileDialog.InitialDirectory = projectDirectory + "\\GuiPrvaVerzija\\odjeca";
                 openFileDialog.Filter = "All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
@@ -219,10 +267,10 @@ namespace GuiPrvaVerzija
                 if (result == true)
                 {
                     filePath = openFileDialog.SafeFileName;
-                    var uriSource = new Uri(@"/GuiPrvaVerzija;component/odjeca/"+ filePath, UriKind.Relative);
+                    var uriSource = new Uri(@"/GuiPrvaVerzija;component/odjeca/" + filePath, UriKind.Relative);
                     Slika.Source = new BitmapImage(uriSource);
                 }
-            }            
+            }
         }
 
 
@@ -230,15 +278,30 @@ namespace GuiPrvaVerzija
         //Izmjena baze artikala Canvas
         private void btnSifra2_Click(object sender, RoutedEventArgs e)
         {
-            string sifra = tbSifra2.Text;
-            //Pretraga po sifri i da se postavi vrijednost na mjesto koje treba da budu
+            int sifra = int.Parse(tbSifra2.Text);
 
-            tbNaziv2.IsEnabled = true;
-            tbCijena2.IsEnabled = true;
-            tbKolicina2.IsEnabled = true;
-            tbVelicina2.IsEnabled = true;
-            cbxKategorija2.IsEnabled = true;
-            btnSlika2.IsEnabled = true;
+            //Pretraga po sifri i da se postavi vrijednost na mjesto koje treba da budu
+            artikal a = listaArtikala.Where(artikal => artikal.sifra==sifra).FirstOrDefault();
+            if (a == null)
+            {
+                MessageBox.Show("Ne postoji artikal sa tom sifrom!");
+            }
+            else
+            {
+                tbNaziv2.IsEnabled = true;
+                tbNaziv2.Text = a.naziv;
+                tbCijena2.IsEnabled = true;
+                tbCijena2.Text = a.cijena.ToString();
+                tbKolicina2.IsEnabled = true;
+                tbKolicina2.Text = a.kolicina.ToString();
+                tbVelicina2.IsEnabled = true;
+                tbVelicina2.Text = a.velicina;
+                cbxKategorija2.IsEnabled = true;
+                int index = a.kategorija.idkategorije - 1;
+                cbxKategorija2.SelectedIndex = index;
+                btnSlika2.IsEnabled = true;
+                //btnSlika2 source treba da se uradi
+            }
 
 
 
@@ -307,33 +370,30 @@ namespace GuiPrvaVerzija
             tbSifra4.Visibility = Visibility.Visible;
         }
 
-        private void btnSifra4_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         private void tbSifra4_KeyUp(object sender, KeyEventArgs e)
         {
-            /*
-                ovu liniju koda mozes staviti i negdje vani tako da se ne pristupa bazi svaki put kada pritisnes dugme
-                ali to je kod koji ce ti omoguciti da se filtriraju racuni po sifri svaki put kada budes otkucala slovo sifre
-                sviRacuni= (from c in db.racuns select c).ToList();
-
-                var filtrirani = sviRacuni.Where(racun => racun.sifra.ToLower().StartsWith(tbSifra4.Text.ToLower()));
-                RacuniTabela4.ItemsSource = filtrirani;
-             */
+            
+            var filtrirani = listaRacuna.Where(racun => racun.idracuna == int.Parse(tbSifra4.Text));
+            RacuniTabela4.ItemsSource = filtrirani;
+            RacuniTabela4.Items.Refresh();
         }
 
         private void btnPogledajRacun4_Click(object sender, RoutedEventArgs e)
         {
-            new PregledRacunaProzor().ShowDialog();
+            racun r = (racun)RacuniTabela4.SelectedItem;
+            new PregledRacunaProzor(r).ShowDialog();
         }
 
-      
+
 
         private void dpDatum4_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            DateTime datum4 = (DateTime)dpDatum4.SelectedDate;
+            var filtrirani = listaRacuna.Where(racun => DateTime.Compare(racun.datum,datum4)==0);
+            RacuniTabela4.ItemsSource = filtrirani;
+            RacuniTabela4.Items.Refresh();
         }
 
         //Zarada
@@ -344,8 +404,14 @@ namespace GuiPrvaVerzija
             {
                 DateTime datumPoc = (DateTime)dpDatumPoc5.SelectedDate;
                 DateTime datumKraj = (DateTime)dpDatumKraj5.SelectedDate;
+                decimal zarada = 0;
+                foreach(var r in listaRacuna)
+                    if(DateTime.Compare(r.datum,datumPoc)>=0 && DateTime.Compare(r.datum, datumKraj) <= 0)
+                    {
+                        zarada += r.ukupno;
+                    }
                 //naci zaradu izmedju ova dva datuma i staviti na ovaj tbZarada.Text=
-                tbZarada.Text = "";
+                tbZarada.Text = zarada+" KM";
             }
         }
 
@@ -353,43 +419,167 @@ namespace GuiPrvaVerzija
 
         private void tbZaposleni_KeyUp(object sender, KeyEventArgs e)
         {
-            /*
-             sviZaposleniFiltrirani da budu zaposleni koji su u ovim combo boxovima izabrani
+            
+            var filtrirani = radniciUTabeli.Where(radnik => radnik.ime.ToLower().StartsWith(tbZaposleni.Text.ToLower()) || radnik.prezime.ToLower().StartsWith(tbZaposleni.Text.ToLower()) || radnik.username.ToLower().StartsWith(tbZaposleni.Text.ToLower()));
+            ZaposleniTable.ItemsSource = filtrirani;
+            ZaposleniTable.Items.Refresh();
 
-            var filtrirani = sviZaposleniFiltrirani.Where(zaposlen => zaposlen.ime.ToLower().StartsWith(tbZaposleni.Text.ToLower()) || zaposlen.prezime.ToLower().StartsWith(tbZaposleni.Text.ToLower()) || zaposlen.username.ToLower().StartsWith(tbZaposleni.Text.ToLower()) );
-            ZaposleniTable.ItemsSource = filtrirani;*/
         }
 
         private void cbSviItem_Selected(object sender, RoutedEventArgs e)
         {
+            radniciUTabeli = new List<radnik>();
+            int selectIndex = cbAktivni.SelectedIndex;
+            foreach (radnik r in listaRadnika)
+            {
+                if (selectIndex == 0)
+                {
+                    if (r.aktivan)
+                        radniciUTabeli.Add(r);                   
+                }
+                else
+                {
+                    if (!r.aktivan)
+                        radniciUTabeli.Add(r);
+                }
+            }
+            ZaposleniTable.ItemsSource = radniciUTabeli;
+            ZaposleniTable.Items.Refresh();
 
         }
         private void cbRadniciItem_Selected(object sender, RoutedEventArgs e)
         {
+            radniciUTabeli = new List<radnik>();         
+            int selectIndex = cbAktivni.SelectedIndex;
+            bool pronadjen = false;
+            foreach (radnik r in listaRadnika)
+            {
+                pronadjen = false;
+                foreach(administrator a in listaAdministratora)
+                {
+                    if (a.radnik.jmb.Equals(r.jmb))
+                        pronadjen = true;
+                }
+                if (!pronadjen)
+                {
+                    if (selectIndex == 0)
+                    {
+                        if (r.aktivan)
+                            radniciUTabeli.Add(r);
+                    }
+                    else
+                    {
+                        if (!r.aktivan)
+                            radniciUTabeli.Add(r);
+                    }
+                }
+            }
+            ZaposleniTable.ItemsSource = radniciUTabeli;
+            ZaposleniTable.Items.Refresh();
 
         }
         private void cbAdministratoriItem_Selected(object sender, RoutedEventArgs e)
         {
-
+            radniciUTabeli = new List<radnik>();
+            int selectIndex = cbAktivni.SelectedIndex;
+            foreach (administrator r in listaAdministratora)
+            {
+                
+                {
+                    if (selectIndex == 0)
+                    {
+                        if (r.radnik.aktivan)
+                            radniciUTabeli.Add(r.radnik);
+                    }
+                    else
+                    {
+                        if (!r.radnik.aktivan)
+                            radniciUTabeli.Add(r.radnik);
+                    }
+                }
+            }
+            ZaposleniTable.ItemsSource = radniciUTabeli;
+            ZaposleniTable.Items.Refresh();
         }
         private void cbTrenutnoItem_Selected(object sender, RoutedEventArgs e)
         {
-
+            int selectIndex = cbZaposleni.SelectedIndex;
+            radniciUTabeli = new List<radnik>();
+            if (selectIndex == 0)
+            {
+                foreach (radnik r in listaRadnika)
+                    if (r.aktivan)
+                        radniciUTabeli.Add(r);
+            }else if (selectIndex == 1)
+            {
+                bool pronadjen = false;
+                foreach(radnik r in listaRadnika)
+                {
+                    if (r.aktivan)
+                    {
+                        pronadjen = false;
+                        foreach (var a in listaAdministratora)
+                            if (a.radnik.jmb.Equals(r.jmb))
+                                pronadjen = true;
+                        if (!pronadjen)
+                            radniciUTabeli.Add(r);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var a in listaAdministratora)
+                    if (a.radnik.aktivan)
+                        radniciUTabeli.Add(a.radnik);
+            }
+            ZaposleniTable.ItemsSource = radniciUTabeli;
+            ZaposleniTable.Items.Refresh();
         }
         private void cbBivsiItem_Selected(object sender, RoutedEventArgs e)
         {
-
+            int selectIndex = cbZaposleni.SelectedIndex;
+            radniciUTabeli = new List<radnik>();
+            if (selectIndex == 0)
+            {
+                foreach (radnik r in listaRadnika)
+                    if (!r.aktivan)
+                        radniciUTabeli.Add(r);
+            }
+            else if (selectIndex == 1)
+            {
+                bool pronadjen = false;
+                foreach (radnik r in listaRadnika)
+                {
+                    if (!r.aktivan)
+                    {
+                        pronadjen = false;
+                        foreach (var a in listaAdministratora)
+                            if (a.radnik.jmb.Equals(r.jmb))
+                                pronadjen = true;
+                        if (!pronadjen)
+                            radniciUTabeli.Add(r);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var a in listaAdministratora)
+                    if (!a.radnik.aktivan)
+                        radniciUTabeli.Add(a.radnik);
+            }
+            ZaposleniTable.ItemsSource = radniciUTabeli;
+            ZaposleniTable.Items.Refresh();
         }
 
-        
+
         private void btnDodajRadnika_Click(object sender, RoutedEventArgs e)
         {
             new DodajAzurirajRadnikaProzor().ShowDialog();
         }
         private void btnAzurirajRadnika_Click(object sender, RoutedEventArgs e)
         {
-            string Radnik = "";
-            new DodajAzurirajRadnikaProzor(Radnik).ShowDialog();
+            radnik r = (radnik)ZaposleniTable.SelectedItem;
+            new DodajAzurirajRadnikaProzor(r).ShowDialog();
         }
 
 

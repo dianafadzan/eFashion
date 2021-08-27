@@ -10,12 +10,12 @@
         Icon="images\379432_online_shopping_icon.png"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#f2ebe9" Closed="Window_Closed">
 
-    
+
     <Grid>
 
         <Canvas>
-         
-            
+
+
             <Canvas Width="800"  HorizontalAlignment="Left" Height="90" Canvas.Top="0" Canvas.Left="0">
                 <Canvas.Background>
                     <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
@@ -96,7 +96,7 @@
                 <TextBox x:Name="tbSifra2" Focusable="True" Width="300" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Top="20" Canvas.Left="150"   />
                 <Button x:Name="btnSifra2" Canvas.Right="40" Canvas.Top="20" Width="50" Height="35" Click="btnSifra2_Click">
                     <Image  Width="50" Height="35" Stretch="Fill" Source="/images/314807_search_icon.png" />
-                    
+
                 </Button>
 
                 <TextBlock Text="Veličina"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="60" Canvas.Top="160" TextAlignment="Center"/>
@@ -120,8 +120,8 @@
                 <Button x:Name="btnSacuvajNoviArtikal2" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Right="30" Canvas.Bottom="20" Width="180" Click="btnSacuvajNoviArtikal2_Click">
                     <TextBlock Text="Sačuvaj" TextWrapping="Wrap" TextAlignment="Center" />
                 </Button>
-                
-                
+
+
             </Canvas>
 
 
@@ -149,11 +149,11 @@
                 </DataGrid>
 
             </Canvas>
-            
+
             <Canvas x:Name="PregledRacunaCanvas" Canvas.Top="90" Canvas.Left="200" Height="560" Width="600" Visibility="Hidden">
                 <TextBlock Text="Izaberite opciju pretrage" Canvas.Top="50" Canvas.Left="10" Height="30" Width="240" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
                 <ComboBox Canvas.Top="90" Canvas.Left="30" Height="30" Width="200" Background="Transparent" >
-                    <ComboBoxItem FontSize="20" FontFamily="Bodoni Bk BT" Foreground="#264143" Selected="ComboBoxItem_Selected_Datum"> Datum računa </ComboBoxItem>
+                    <ComboBoxItem FontSize="20" FontFamily="Bodoni Bk BT" Foreground="#264143" Selected="ComboBoxItem_Selected_Datum">Datum računa</ComboBoxItem>
                     <ComboBoxItem FontSize="20" FontFamily="Bodoni Bk BT" Foreground="#264143" Selected="ComboBoxItem_Selected_Sifra">Šifra računa</ComboBoxItem>
                 </ComboBox>
 
@@ -161,15 +161,15 @@
 
                 <DatePicker Name="dpDatum4" Canvas.Top="90" Canvas.Left="300" Height="25" Width="220" Visibility="Hidden" SelectedDateChanged="dpDatum4_SelectedDateChanged"/>
                 <TextBox x:Name="tbSifra4" Canvas.Top="90" Canvas.Left="300" Height="25" Width="220" Visibility="Hidden" KeyUp="tbSifra4_KeyUp"                       />
-                
+
 
                 <DataGrid Name="RacuniTabela4" Canvas.Left="70" Canvas.Top="160" RowHeight="20" ColumnWidth="140"
                   HeadersVisibility="All" IsReadOnly="True" AutoGenerateColumns="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                   HorizontalAlignment="Left" Width="420" Height="250" FontSize="14">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Šifra" Binding="{Binding Sifra}" Width="140"/>
-                        <DataGridTextColumn Header="Datum" Binding="{Binding Datum, StringFormat=dd/MM/yyyy}" Width="140"/>
-                        <DataGridTextColumn Header="Iznos" Binding="{Binding Iznos}" Width="140"/>
+                        <DataGridTextColumn Header="Šifra" Binding="{Binding idracuna}" Width="140"/>
+                        <DataGridTextColumn Header="Datum" Binding="{Binding datum, StringFormat=dd/MM/yyyy}" Width="140"/>
+                        <DataGridTextColumn Header="Iznos" Binding="{Binding ukupno}" Width="140"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -177,7 +177,7 @@
 
 
             </Canvas>
-            
+
             <Canvas x:Name="PregledZaradeCanvas" Canvas.Top="200" Canvas.Left="200" Height="370" Width="600" Visibility="Hidden">
 
                 <TextBlock Text="Izaberite period pregleda zarade" Canvas.Top="60" Canvas.Left="100" Height="30" Width="400" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
