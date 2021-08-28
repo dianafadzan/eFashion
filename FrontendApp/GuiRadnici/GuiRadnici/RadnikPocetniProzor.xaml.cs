@@ -236,6 +236,7 @@ namespace GuiRadnici
                         artikalSifra = a.sifra
                     };
                     var t2 = Task.Run(() => Utilities.CreateStavkaAsync(s));
+                    Console.WriteLine(t2.Result);
                 }
                 artikliURacunu.Clear();
                 RacunTabela.ItemsSource = artikliURacunu;
@@ -271,9 +272,69 @@ namespace GuiRadnici
             tbUkupno2.Text = "0.0 KM";
         }
 
-        private void btnStampajRacun2_Click(object sender, RoutedEventArgs e)
+        private async void btnStampajRacun2_Click(object sender, RoutedEventArgs e)
         {
+            decimal ukupno = 0;
+            bool validno = true;
+            List<stavka> lista = await Utilities.GetStavkeAsync("http://localhost:9000/stavke/" + racunTest.idracuna);
+            foreach (artikal a in NoviRacunTabela.Items)
+            {
+                stavka pom = lista.Where(stavka => stavka.artikal.sifra == a.sifra).FirstOrDefault();
+                if (pom.artikal.kolicina > a.kolicina || a.kolicina>0)
+                    validno = false;
+                ukupno += (a.kolicina * a.cijena);
+                tbUkupno2.Text = ukupno.ToString();
+            }
+            if (!validno)
+            {
+                racun r = new racun
+                {
+                    idracuna = 0,
+                    datum = DateTime.Now,
+                    radnik = radnikPravi,
+                    ukupno = ukupno
 
+                };
+                var t = Task.Run(() => Utilities.CreateRacunAsync(r));
+                Console.WriteLine(t.Result);
+                var rac1 = await Utilities.GetRacuniAsync("http://localhost:9000/racuni");
+                var rac2 = rac1.Last();
+
+                foreach (artikal a in NoviRacunTabela.Items)
+                {
+                    stavka s = new stavka
+                    {
+                        cijena = a.cijena,
+                        kolicina = a.kolicina,
+                        racun = rac2,
+                        artikal = a,
+                        racunIdracuna = rac2.idracuna,
+                        artikalSifra = a.sifra
+                    };
+                    var t2 = Task.Run(() => Utilities.CreateStavkaAsync(s));
+                    Console.WriteLine(t2.Result);
+                }
+                artikliURacunu.Clear();
+                RacunTabela.ItemsSource = artikliURacunu;
+                RacunTabela.Items.Refresh();
+                ukupno = 0;
+                tbUkupno.Text = ukupno + " KM";
+                listaArtikala = new List<artikal>();
+                NoviRacunTabela.ItemsSource = listaArtikala;
+                NoviRacunTabela.Items.Refresh();
+                lista = new List<stavka>();
+                RacunTabela2.ItemsSource = lista;
+                RacunTabela2.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Nije moguće stornirati račun jer nema dovoljno artikala na orginalnom računu");
+            }
+            artikliURacunu.Clear();
+            RacunTabela.ItemsSource = artikliURacunu;
+            RacunTabela.Items.Refresh();
+            ukupno = 0;
+            tbUkupno.Text = ukupno + " KM";
         }
 
         private void RacunTabela2_KeyUp(object sender, KeyEventArgs e)
@@ -286,7 +347,7 @@ namespace GuiRadnici
                 RacunTabela2.SelectedIndex = index;
                 stavka s= (stavka)RacunTabela2.SelectedItem;
                 artikal a = s.artikal;
-                a.kolicina = 0 - a.kolicina;
+                a.kolicina =-1;
                 artikliURacunu.Add(a);
                 NoviRacunTabela.ItemsSource = artikliURacunu;
                 NoviRacunTabela.Items.Refresh();
@@ -300,9 +361,20 @@ namespace GuiRadnici
         private async void btnSifra2_Click(object sender, RoutedEventArgs e)
         {
             racunTest = listaRacuna.Where(racun => racun.idracuna == int.Parse(tbSifra2.Text)).FirstOrDefault();
-            List<stavka> lista = await Utilities.GetStavkeAsync("http://localhost:9000/stavke/" + racunTest.idracuna);
-            RacunTabela2.ItemsSource = lista;
-            RacunTabela2.Items.Refresh();
+            if (racunTest!=null)
+            {
+                List<stavka> lista = await Utilities.GetStavkeAsync("http://localhost:9000/stavke/" + racunTest.idracuna);
+            
+                RacunTabela2.ItemsSource = lista;
+                RacunTabela2.Items.Refresh();
+                List<artikal> list = new List<artikal>();
+                NoviRacunTabela.ItemsSource = list;
+                NoviRacunTabela.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Ne postoji racun sa tom sifrom!");
+            }
         }
 
         private async void NoviRacunTabela_KeyUp(object sender, KeyEventArgs e)
@@ -314,6 +386,7 @@ namespace GuiRadnici
                     ukupno += (a.kolicina * a.cijena);
                 tbUkupno2.Text = ukupno + " KM";
             }
+            artikal s = (artikal)NoviRacunTabela.SelectedItem;
             List<stavka> lista = await Utilities.GetStavkeAsync("http://localhost:9000/stavke/" + racunTest.idracuna);
             RacunTabela2.ItemsSource = lista;
             RacunTabela2.Items.Refresh();
