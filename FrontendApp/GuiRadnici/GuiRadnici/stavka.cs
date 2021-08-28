@@ -8,9 +8,11 @@ namespace GuiRadnici
 {
     public class stavka
     {
-        public int racun_idracuna { get; set; }
-        public string artikal_sifra { get; set; }
+        public int racunIdracuna { get; set; }
+        public int artikalSifra { get; set; }
         public int kolicina { get; set; }
         public decimal cijena { get; set; }
+        public racun racun { get; set; }
+        public artikal artikal { get; set; }
     }
 }

@@ -61,9 +61,16 @@
     <Compile Include="administrator.cs" />
     <Compile Include="artikal.cs" />
     <Compile Include="kategorija.cs" />
+    <Compile Include="PregledRacunaProzor.xaml.cs">
+      <DependentUpon>PregledRacunaProzor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="racun.cs" />
     <Compile Include="radnik.cs" />
+    <Compile Include="RadnikPocetniProzor.xaml.cs">
+      <DependentUpon>RadnikPocetniProzor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="stavka.cs" />
+    <Compile Include="UkupnaCijenaConvertor.cs" />
     <Compile Include="Utilities.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +84,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PregledRacunaProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadnikPocetniProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -104,6 +119,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\118589_user_icon.png" />
+    <Resource Include="images\13525_user_white_icon.png" />
+    <Resource Include="images\1398919_close_cross_incorrect_invalid_x_icon.png" />
+    <Resource Include="images\172625_male_user_icon.png" />
+    <Resource Include="images\2180662_user_instagram_person_profile_icon.png" />
+    <Resource Include="images\2203549_admin_avatar_human_login_user_icon.png" />
+    <Resource Include="images\314807_search_icon.png" />
+    <Resource Include="images\370091_back_backward_direction_left_previous_icon %281%29.png" />
+    <Resource Include="images\370091_back_backward_direction_left_previous_icon.png" />
+    <Resource Include="images\379432_online_shopping_icon.png" />
+    <Resource Include="images\add.png" />
+    <Resource Include="images\logout.png" />
+    <Resource Include="images\shop-cart-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

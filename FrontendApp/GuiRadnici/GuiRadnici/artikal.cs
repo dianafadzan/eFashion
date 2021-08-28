@@ -14,6 +14,6 @@ namespace GuiRadnici
         public int kolicina { get; set; }
         public decimal cijena { get; set; }
         public string slika { get; set; }
-        public int kategorija_idkategorije { get; set; }
+        public kategorija kategorija { get; set; }
     }
 }

@@ -14,6 +14,6 @@ namespace GuiRadnici
         public string username { get; set; }
         public string lozinka { get; set; }
         public double plata { get; set; }
-        public Boolean aktivan { get; set; }
+        public int aktivan { get; set; }
     }
 }
