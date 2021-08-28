@@ -36,6 +36,8 @@ namespace GuiPrvaVerzija
         List<artikal> listaArtikala = new List<artikal>();
 
         List<radnik> radniciUTabeli = new List<radnik>();
+        List<stavka> listaStavki = new List<stavka>();
+        List<stavka> stavkeURacunu = new List<stavka>();
 
         artikal aZaIzmjenu;
 
@@ -46,6 +48,12 @@ namespace GuiPrvaVerzija
             listaRadnika = await Utilities.GetRadniciAsync("http://localhost:9000/radnici");
             listaAdministratora = await Utilities.GetAdministratoriAsync("http://localhost:9000/administratori");
             listaArtikala = await Utilities.GetArtikliAsync("http://localhost:9000/artikli");
+            foreach (var rac in listaRacuna)
+            {
+                stavkeURacunu = await Utilities.GetStavkeAsync("http://localhost:9000/stavke/" + rac.idracuna);
+                foreach (var s in stavkeURacunu)
+                    listaStavki.Add(s);
+            }
 
         }
         public AdminastrorPocetniProzor(administrator admin)
@@ -147,17 +155,41 @@ namespace GuiPrvaVerzija
 
             dpDatumPoc.DisplayDate = DateTime.Today;
             dpDatumKraj.DisplayDate = DateTime.Today;
-            //nije dobro popunjena tabela, artikli treba da se poredaju po broju prodanih artikala
-            //========================================
-            //=========================================
-            ProdajaTabela3.ItemsSource = listaArtikala;
+            List<artikal> artikliProdaja = new List<artikal>();
+            foreach(var art in listaArtikala)
+            {
+                artikal a = art;
+                a.kolicina = 0;
+                a.cijena = 0;
+                artikliProdaja.Add(a);
+            }
+            foreach(var st in listaStavki)
+            {
+                if (DateTime.Compare(st.racun.datum, DateTime.Today) == 0)
+                {
+
+                    foreach (var art in artikliProdaja)
+                    {
+                        if (art.sifra == st.artikal.sifra)
+                        {
+                            art.kolicina += st.artikal.kolicina;
+                            art.cijena += st.artikal.cijena;
+
+                        }
+                    }
+                }
+                
+            }
+            ProdajaTabela3.ItemsSource = artikliProdaja;
             ProdajaTabela3.Items.Refresh();
 
             cbKategorija3.Items.Clear();
+            cbKategorija3.Items.Add("Svi");
             foreach (var kat in listaKategorija)
             {
                 cbKategorija3.Items.Add(kat.naziv);
             }
+            cbKategorija3.SelectedIndex = 0;
         }
 
         private async void btnPregledZarade_Click(object sender, RoutedEventArgs e)
@@ -477,10 +509,39 @@ namespace GuiPrvaVerzija
         {
             if (VecPokrenuto)
             {
-                String kategorija = cbKategorija3.Text;
+                int kategorijaInd = cbKategorija3.SelectedIndex;
                 DateTime datumPoc = (DateTime)dpDatumPoc.SelectedDate;
                 DateTime datumKraj = (DateTime)dpDatumKraj.SelectedDate;
+                List<artikal> artikliProdaja = new List<artikal>();
+                foreach (var art in listaArtikala)
+                {
+                    if (art.kategorija.idkategorije == (kategorijaInd) || kategorijaInd==0)
+                    {
+                        artikal a = art;
+                        a.kolicina = 0;
+                        a.cijena = 0;
+                        artikliProdaja.Add(a);
+                    }
+                }
+                foreach (var st in listaStavki)
+                {
+                    if (DateTime.Compare(st.racun.datum, datumPoc) >= 0 && DateTime.Compare(st.racun.datum,datumKraj)<=0)
+                    {
 
+                        foreach (var art in artikliProdaja)
+                        {
+                            if (art.sifra == st.artikal.sifra)
+                            {
+                                art.kolicina += st.artikal.kolicina;
+                                art.cijena += st.artikal.cijena;
+
+                            }
+                        }
+                    }
+
+                }
+                ProdajaTabela3.ItemsSource = artikliProdaja;
+                ProdajaTabela3.Items.Refresh();
                 //sada treba povuci iz baze sve proizvode koji su se prodali u periodu od datumPoc
                 // do datumKraj i koji su kategorije kategorija. Ako je kategorija!=Sve onda je neka
                 //specificna kategorija, a ako je kategorija ==Sve onda su to sve kategorije

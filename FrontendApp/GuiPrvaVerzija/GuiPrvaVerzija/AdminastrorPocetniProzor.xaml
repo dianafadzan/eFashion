@@ -141,10 +141,10 @@
                   HeadersVisibility="All" IsReadOnly="True" AutoGenerateColumns="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                   HorizontalAlignment="Left" Width="520" Height="310" FontSize="14">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Šifra" Binding="{Binding Sifra}" Width="140"/>
-                        <DataGridTextColumn Header="Naziv" Binding="{Binding Datum, StringFormat=dd/MM/yyyy}" Width="160"/>
-                        <DataGridTextColumn Header="Količina" Binding="{Binding Kolicina}" Width="110"/>
-                        <DataGridTextColumn Header="Zarada" Binding="{Binding Zarada}" Width="110"/>
+                        <DataGridTextColumn Header="Šifra" Binding="{Binding sifra}" Width="140"/>
+                        <DataGridTextColumn Header="Naziv" Binding="{Binding naziv}" Width="160"/>
+                        <DataGridTextColumn Header="Količina" Binding="{Binding kolicina}" Width="110"/>
+                        <DataGridTextColumn Header="Zarada" Binding="{Binding cijena}" Width="110"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
