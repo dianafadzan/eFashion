@@ -1,0 +1,240 @@
+﻿<Window x:Class="GuiPrvaVerzija.AdminastrorPocetniProzor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:GuiPrvaVerzija"
+        mc:Ignorable="d"
+        Title="eFashion" Height="700" Width="800"
+        Icon="images\379432_online_shopping_icon.png"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#f2ebe9" Closed="Window_Closed">
+
+    
+    <Grid>
+
+        <Canvas>
+         
+            
+            <Canvas Width="800"  HorizontalAlignment="Left" Height="90" Canvas.Top="0" Canvas.Left="0">
+                <Canvas.Background>
+                    <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
+                        <GradientStop Color="#264143" Offset="1"/>
+                        <GradientStop Color="#f2ebe9" Offset="0"/>
+                    </LinearGradientBrush>
+                </Canvas.Background>
+
+                <TextBlock x:Name="tbNazivApp" Text="eFashion" Foreground="#264143" FontFamily="Monotype Corsiva" FontSize="60" HorizontalAlignment="Center" Canvas.Left="20" Canvas.Top="10" Visibility="Hidden"/>
+                <Button x:Name="btnLogout" Background="Transparent" BorderBrush="#eddcd9"  BorderThickness="0" Height="55" Width="45" Canvas.Right="20" Canvas.Top="15" Click="btnLoggou_Click">
+                    <Image Source="logout.png"/>
+                </Button>
+
+            </Canvas>
+            <Canvas x:Name="PocetniCanvas" Canvas.Top="90" Canvas.Left="0" Height="560" Width="800" Visibility="Hidden">
+
+
+                <TextBlock Name="tbDobrodosli" Text="Dobro došli na eFashion" Foreground="#264143" FontFamily="Monotype Corsiva" FontSize="60" HorizontalAlignment="Center" Canvas.Left="150" Canvas.Top="100"/>
+
+                <Button x:Name="btnDodajRobu" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Left="100" Canvas.Top="230" Width="180" Click="btnDodajRobu_Click">
+                    <TextBlock Text="Unos robe u sistem" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+                <Button x:Name="btnIzmjeniBazu" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Right="100" Canvas.Top="230" Width="180" Click="btnIzmjeniBazu_Click">
+                    <TextBlock Text="Izmjena baze artikala" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+                <Button x:Name="btnPregledArt" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Left="100" Canvas.Top="330" Width="180" Click="btnPregledArt_Click">
+                    <TextBlock Text="Pregled prodaje artikala" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+                <Button x:Name="btnPregledRacuna" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Right="100" Canvas.Top="330" Width="180" Click="btnPregledRacuna_Click">
+                    <TextBlock Text="Pregledaj račune" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+                <Button x:Name="btnPregledZarade" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Left="100" Canvas.Top="430" Width="180" Click="btnPregledZarade_Click">
+                    <TextBlock Text="Pregledaj zaradu" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+                <Button x:Name="btnIzmjenaZaposlenih" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Right="100" Canvas.Top="430" Width="180" Click="btnIzmjenaZaposlenih_Click">
+                    <TextBlock Text="Baza zaposlenih" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+
+            </Canvas>
+
+            <Canvas x:Name="UnosRobeCanvas" Canvas.Top="95" Canvas.Left="190" Height="560" Width="600" Visibility="Hidden">
+
+                <TextBlock Text="Naziv"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="220" Canvas.Top="20" TextAlignment="Center"/>
+                <TextBox x:Name="tbNaziv" Focusable="True" Width="500" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Top="50" Canvas.Left="40"   />
+
+
+                <TextBlock Text="Veličina"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="60" Canvas.Top="110" TextAlignment="Center"/>
+                <TextBox x:Name="tbVelicina" Focusable="True" Width="200" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Left="20" Canvas.Top="150"  />
+
+                <TextBlock Text="Količina"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="60" Canvas.Top="410" TextAlignment="Center"/>
+                <TextBox x:Name="tbKolicina" Focusable="True" Width="200" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Left="20" Canvas.Top="450"  />
+
+                <TextBlock Text="Cijena"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="60" Canvas.Top="210" TextAlignment="Center"/>
+                <TextBox x:Name="tbCijena" Focusable="True" Width="200" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Left="20" Canvas.Top="250"  />
+
+                <TextBlock Text="Kategorija"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="60" Canvas.Top="310" TextAlignment="Center"/>
+                <ComboBox x:Name="cbxKategorija" Focusable="True" Width="200" Height="35"  Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Left="20" Canvas.Top="350" />
+
+                <TextBlock Text="Slika"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Right="60" Canvas.Top="110"/>
+                <Button x:Name="btnSlika" Canvas.Right="20" Canvas.Top="150" Width="250" Height="250" Click="btnSlika_Click">
+                    <Image x:Name="Slika" Width="250" Height="250" Stretch="Fill" Source="add.png"/>
+                </Button>
+
+
+                <Button x:Name="btnSacuvajNoviArtikal" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Right="30" Canvas.Bottom="20" Width="180" Click="btnSacuvajNoviArtikal_Click">
+                    <TextBlock Text="Sačuvaj" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+
+
+            </Canvas>
+            <Canvas x:Name="IzmjenaBazeArtikalaCanvas" Canvas.Top="90" Canvas.Left="200" Height="560" Width="600" Visibility="Hidden">
+
+                <TextBlock Text="Naziv"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="220" Canvas.Top="70" TextAlignment="Center"/>
+                <TextBox x:Name="tbNaziv2" Focusable="True" Width="500" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Top="100" Canvas.Left="40"  IsEnabled="False" />
+
+
+                <TextBlock Text="Šifra"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="20" Canvas.Top="20" TextAlignment="Center"/>
+                <TextBox x:Name="tbSifra2" Focusable="True" Width="300" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Top="20" Canvas.Left="150"   />
+                <Button x:Name="btnSifra2" Canvas.Right="40" Canvas.Top="20" Width="50" Height="35" Click="btnSifra2_Click">
+                    <Image  Width="50" Height="35" Stretch="Fill" Source="/images/314807_search_icon.png" />
+                    
+                </Button>
+
+                <TextBlock Text="Veličina"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="60" Canvas.Top="160" TextAlignment="Center"/>
+                <TextBox x:Name="tbVelicina2" Focusable="True" Width="200" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Left="20" Canvas.Top="200" IsEnabled="False" />
+
+                <TextBlock Text="Količina"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="60" Canvas.Top="460" TextAlignment="Center"/>
+                <TextBox x:Name="tbKolicina2" Focusable="True" Width="200" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Left="20" Canvas.Top="500" IsEnabled="False" />
+
+                <TextBlock Text="Cijena"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="60" Canvas.Top="260" TextAlignment="Center"/>
+                <TextBox x:Name="tbCijena2" Focusable="True" Width="200" Height="35" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Left="20" Canvas.Top="300" IsEnabled="False" />
+
+                <TextBlock Text="Kategorija"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Left="60" Canvas.Top="360" TextAlignment="Center"/>
+                <ComboBox x:Name="cbxKategorija2" Focusable="True" Width="200" Height="35"  Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Left="20" Canvas.Top="400" IsEnabled="False" />
+
+                <TextBlock Text="Slika"  FontSize="25" FontFamily="Bodoni Bk BT" Foreground="#264143"  Width="121" Canvas.Right="60" Canvas.Top="160"/>
+                <Button x:Name="btnSlika2" Canvas.Right="20" Canvas.Top="200" Width="250" Height="250" Click="btnSlika2_Click" IsEnabled="False">
+                    <Image x:Name="Slika2" Width="250" Height="250" Stretch="Fill" Source="add.png"/>
+                </Button>
+
+
+                <Button x:Name="btnSacuvajNoviArtikal2" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Right="30" Canvas.Bottom="20" Width="180" Click="btnSacuvajNoviArtikal2_Click">
+                    <TextBlock Text="Sačuvaj" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+                
+                
+            </Canvas>
+
+
+            <Canvas x:Name="PregledProdajeCanvas" Canvas.Top="90" Canvas.Left="200" Height="560" Width="600" Visibility="Hidden">
+                <TextBlock Text="Izaberite kategoriju artikla" Canvas.Top="50" Canvas.Left="10" Height="30" Width="240" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <ComboBox x:Name="cbKategorija3" Canvas.Top="90" Canvas.Left="30" Height="30" Width="200" Background="Transparent" SelectionChanged="cbKategorija3_Selected" SelectedIndex="0">
+                    <ComboBoxItem FontSize="20" FontFamily="Bodoni Bk BT" Foreground="#264143">Sve</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Text="Izaberite period pregleda" Canvas.Top="50" Canvas.Left="300" Height="30" Width="280" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <TextBlock Text="od:" Canvas.Top="90" Canvas.Left="320" Height="30" Width="40" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <DatePicker Name="dpDatumPoc" Canvas.Top="90" Canvas.Left="380" Height="25" Width="180" Visibility="Visible" SelectedDateChanged="dpDatumPoc_SelectedDateChanged" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                <TextBlock Text="do:" Canvas.Top="120" Canvas.Left="320" Height="30" Width="40" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <DatePicker Name="dpDatumKraj" Canvas.Top="120" Canvas.Left="380" Height="25" Width="180" Visibility="Visible" SelectedDateChanged="dpDatumKraj_SelectedDateChanged" SelectedDate="{x:Static sys:DateTime.Now}" />
+
+                <DataGrid Name="ProdajaTabela3" Canvas.Left="40" Canvas.Top="200" RowHeight="20" ColumnWidth="140"
+                  HeadersVisibility="All" IsReadOnly="True" AutoGenerateColumns="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                  HorizontalAlignment="Left" Width="520" Height="310" FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Šifra" Binding="{Binding Sifra}" Width="140"/>
+                        <DataGridTextColumn Header="Naziv" Binding="{Binding Datum, StringFormat=dd/MM/yyyy}" Width="160"/>
+                        <DataGridTextColumn Header="Količina" Binding="{Binding Kolicina}" Width="110"/>
+                        <DataGridTextColumn Header="Zarada" Binding="{Binding Zarada}" Width="110"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Canvas>
+            
+            <Canvas x:Name="PregledRacunaCanvas" Canvas.Top="90" Canvas.Left="200" Height="560" Width="600" Visibility="Hidden">
+                <TextBlock Text="Izaberite opciju pretrage" Canvas.Top="50" Canvas.Left="10" Height="30" Width="240" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <ComboBox Canvas.Top="90" Canvas.Left="30" Height="30" Width="200" Background="Transparent" >
+                    <ComboBoxItem FontSize="20" FontFamily="Bodoni Bk BT" Foreground="#264143" Selected="ComboBoxItem_Selected_Datum"> Datum računa </ComboBoxItem>
+                    <ComboBoxItem FontSize="20" FontFamily="Bodoni Bk BT" Foreground="#264143" Selected="ComboBoxItem_Selected_Sifra">Šifra računa</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock x:Name="tbUputstvo" Canvas.Top="50" Canvas.Left="300" Height="30" Width="210" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+
+                <DatePicker Name="dpDatum4" Canvas.Top="90" Canvas.Left="300" Height="25" Width="220" Visibility="Hidden" SelectedDateChanged="dpDatum4_SelectedDateChanged"/>
+                <TextBox x:Name="tbSifra4" Canvas.Top="90" Canvas.Left="300" Height="25" Width="220" Visibility="Hidden" KeyUp="tbSifra4_KeyUp"                       />
+                
+
+                <DataGrid Name="RacuniTabela4" Canvas.Left="70" Canvas.Top="160" RowHeight="20" ColumnWidth="140"
+                  HeadersVisibility="All" IsReadOnly="True" AutoGenerateColumns="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                  HorizontalAlignment="Left" Width="420" Height="250" FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Šifra" Binding="{Binding Sifra}" Width="140"/>
+                        <DataGridTextColumn Header="Datum" Binding="{Binding Datum, StringFormat=dd/MM/yyyy}" Width="140"/>
+                        <DataGridTextColumn Header="Iznos" Binding="{Binding Iznos}" Width="140"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button x:Name="btnPogledajRacun4" Content="Pregledaj račun" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Bottom="50" Canvas.Right="100" Width="200" Height="35" Click="btnPogledajRacun4_Click"/>
+
+
+            </Canvas>
+            
+            <Canvas x:Name="PregledZaradeCanvas" Canvas.Top="200" Canvas.Left="200" Height="370" Width="600" Visibility="Hidden">
+
+                <TextBlock Text="Izaberite period pregleda zarade" Canvas.Top="60" Canvas.Left="100" Height="30" Width="400" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <TextBlock Text="od:" Canvas.Top="135" Canvas.Left="150" Height="30" Width="40" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <DatePicker Name="dpDatumPoc5" Canvas.Top="135" Canvas.Left="250" Height="25" Width="180" Visibility="Visible" SelectedDateChanged="dpDatum5_SelectedDateChanged" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                <TextBlock Text="do:" Canvas.Top="210" Canvas.Left="150" Height="30" Width="40" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <DatePicker Name="dpDatumKraj5" Canvas.Top="210" Canvas.Left="250" Height="25" Width="180" Visibility="Visible" SelectedDateChanged="dpDatum5_SelectedDateChanged" SelectedDate="{x:Static sys:DateTime.Now}" />
+                <TextBlock Text="Ukupna zarada" Canvas.Top="280" Canvas.Left="150" Height="30" Width="150" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <TextBlock x:Name="tbZarada" Canvas.Top="280" Canvas.Left="320" Height="30" Width="100" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+
+            </Canvas>
+
+            <Canvas x:Name="ZaposleniCanvas" Canvas.Top="90" Canvas.Left="200" Height="560" Width="600" Visibility="Visible">
+
+                <TextBlock Text="Zaposleni" Canvas.Top="30" Width="100" Canvas.Left="70" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+                <TextBox x:Name="tbZaposleni" Focusable="True" Width="250" Height="30" TextAlignment="Center" Foreground="#264143" Background="#f2ebe9 " FontFamily="Bodoni Bk BT" FontSize="25" Canvas.Left="190" Canvas.Top="30"     KeyUp="tbZaposleni_KeyUp" />
+
+                <TextBlock Text="Zaduzenje" Canvas.Top="90" Width="100" Canvas.Left="110" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+
+                <ComboBox Name="cbZaposleni" Width="200" Height="30" Canvas.Top="120" Canvas.Left="70">
+                    <ComboBoxItem Content="Svi" Selected="cbSviItem_Selected"/>
+                    <ComboBoxItem Content="Radnici" Selected="cbRadniciItem_Selected"/>
+                    <ComboBoxItem Content="Administratori" Selected="cbAdministratoriItem_Selected"/>
+                </ComboBox>
+
+                <TextBlock Text="Status" Canvas.Top="90" Width="100" Canvas.Right="110" TextAlignment="Center" Foreground="#264143" FontFamily="Bodoni Bk BT" FontSize="20"/>
+
+                <ComboBox Name="cbAktivni" Width="200" Height="30" Canvas.Top="120" Canvas.Right="70" >
+                    <ComboBoxItem Content="Trenutno zaposleni" Selected="cbTrenutnoItem_Selected"/>
+                    <ComboBoxItem Content="Bivsi radnici" Selected="cbBivsiItem_Selected"/>
+                </ComboBox>
+
+                <DataGrid Name="ZaposleniTable" Canvas.Left="40" Canvas.Top="180" RowHeight="20" ColumnWidth="140"
+                HeadersVisibility="All" IsReadOnly="True" AutoGenerateColumns="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                  HorizontalAlignment="Left" Width="510" Height="200" FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ime" Binding="{Binding ime}" Width="150"/>
+                        <DataGridTextColumn Header="Prezime" Binding="{Binding prezime}" Width="150"/>
+                        <DataGridTextColumn Header="Username" Binding="{Binding username}" Width="150"/>
+                        <DataGridTextColumn Header="Plata" Binding="{Binding plata}" Width="60"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button x:Name="btnNoviRadnik" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Left="70" Canvas.Bottom="50" Width="180" Click="btnDodajRadnika_Click">
+                    <TextBlock Text="Dodaj novog radnika" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+
+                <Button x:Name="btnIzmjeniRadnik" Style="{StaticResource RoundedButtonSacuvajStyle}" Canvas.Right="90" Canvas.Bottom="50" Width="180" Click="btnAzurirajRadnika_Click">
+                    <TextBlock Text="Ažuriraj podatke o radniku" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+
+            </Canvas>
+
+        </Canvas>
+
+
+
+
+    </Grid>
+</Window>
