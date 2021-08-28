@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace GuiPrvaVerzija
 {
-    class Utilities
+    public class Utilities
     {
         public static HttpClient client = new HttpClient();
 
@@ -43,7 +43,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }  
         }
@@ -62,7 +62,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }
         }
@@ -82,7 +82,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }
         }
@@ -102,7 +102,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }
         }
@@ -121,7 +121,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }
         }
@@ -142,7 +142,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }
         }
@@ -163,7 +163,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }
         }
@@ -183,7 +183,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }
         }
@@ -203,7 +203,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }
         }
@@ -224,7 +224,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MyLogger.log(ex);
                 return product;
             }
         }
@@ -258,7 +258,7 @@ namespace GuiPrvaVerzija
 
             }catch(Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                MyLogger.log(ex);
                 return response;
             }
         }
@@ -289,7 +289,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                MyLogger.log(ex);
                 return response;
             }
         }
@@ -320,7 +320,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                MyLogger.log(ex);
                 return response;
             }
         }
@@ -351,7 +351,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                MyLogger.log(ex);
                 return response;
             }
         }
@@ -382,7 +382,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                MyLogger.log(ex);
                 return response;
             }
         }
@@ -414,7 +414,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                MyLogger.log(ex);
                 return response;
             }
         }
@@ -444,7 +444,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                MyLogger.log(ex);
                 return response;
             }
 
@@ -476,7 +476,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                
+                MyLogger.log(ex);
                 return response;
             }
 
@@ -508,7 +508,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                
+                MyLogger.log(ex);
                 return response;
             }
 
@@ -540,7 +540,7 @@ namespace GuiPrvaVerzija
             }
             catch (Exception ex)
             {
-                
+                MyLogger.log(ex);
                 return response;
             }
 
