@@ -34,7 +34,7 @@ public class RadnikEntity {
     @Basic
     @Column(name = "aktivan", nullable = false)
     private Byte aktivan;
-    @OneToOne(mappedBy = "radnik")
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "radnik")
     @JsonIgnore
     private AdministratorEntity administrator;
     @OneToMany(mappedBy = "radnik")

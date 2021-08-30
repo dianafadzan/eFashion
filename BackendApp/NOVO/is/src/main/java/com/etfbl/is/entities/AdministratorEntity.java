@@ -13,8 +13,9 @@ public class AdministratorEntity {
     @Id
     @Column(name = "radnik_jmb", nullable = false, length = 13)
     private String radnikJmb;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "radnik_jmb", referencedColumnName = "jmb", nullable = false)
+    @PrimaryKeyJoinColumn
     private RadnikEntity radnik;
 
 }
