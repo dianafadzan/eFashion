@@ -2,21 +2,26 @@ package com.etfbl.is.services.impl;
 
 import com.etfbl.is.models.dto.JwtRadnik;
 import com.etfbl.is.models.dto.LoginResponse;
+import com.etfbl.is.models.entities.RadnikEntity;
+import com.etfbl.is.models.enums.Role;
 import com.etfbl.is.models.requests.LoginRequest;
 import com.etfbl.is.repositories.AdministratorRepository;
 import com.etfbl.is.repositories.RadnikRepository;
 import com.etfbl.is.services.AuthService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -28,6 +33,8 @@ public class AuthServiceImpl implements AuthService {
     private String tokenExpirationTime;
     @Value("${authorization.token.secret}")
     private String tokenSecret;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public AuthServiceImpl(AdministratorRepository administratorRepository ,RadnikRepository radnikRepository, AuthenticationManager authenticationManager) {
         System.out.println("prvi");
@@ -45,11 +52,44 @@ public class AuthServiceImpl implements AuthService {
         LoginResponse response = null;
         try {
             System.out.println("2");
-            Authentication authenticate = authenticationManager
-                    .authenticate(
-                            new UsernamePasswordAuthenticationToken(
-                                    request.getUsername(), request.getPassword()
-                            )
+            System.out.println("username:"+request.getUsername());
+            System.out.println("pass:"+request.getPassword());
+            System.out.println(authenticationManager);
+
+
+            UsernamePasswordAuthenticationToken us=new UsernamePasswordAuthenticationToken(
+                    request.getUsername(), request.getPassword()
+            );
+            String usernm=(String)us.getPrincipal();
+            String passw=(String)us.getCredentials();
+            System.out.println("usernm:"+usernm);
+            if(radnikRepository!=null){
+                System.out.println("uslo");
+                List<RadnikEntity> r=radnikRepository.getAllByUsername(usernm);
+                if(r!=null){
+                    System.out.println("radnik:"+r.get(0));
+
+                    if(passwordEncoder.matches(passw,r.get(0).getLozinka())){
+                        System.out.println("matches");
+                        UsernamePasswordAuthenticationToken result=new UsernamePasswordAuthenticationToken(r.get(0),passw);
+                        result.setDetails(us.getDetails());
+                        System.out.println("result:"+result);
+                        JwtRadnik jwtRadnik=new JwtRadnik(usernm,passw, Role.USER);
+                        response=radnikRepository.findByUsername(jwtRadnik.getUsername(),LoginResponse.class);
+                        response.setToken(generateJwt(jwtRadnik));
+
+                    }else{
+                        System.out.println("not matches");
+                    }
+                }else{
+                    System.out.println("r null");
+                }
+            }
+
+            System.out.println("us:"+us);
+            /*Authentication authenticate = authenticationManager
+                    .authenticate(us
+
                     );
             System.out.println("3");
             JwtRadnik user = (JwtRadnik) authenticate.getPrincipal();
@@ -62,7 +102,7 @@ public class AuthServiceImpl implements AuthService {
                     response = radnikRepository.findByUsername(user.getUsername(), LoginResponse.class);
 
             }
-            response.setToken(generateJwt(user));
+            response.setToken(generateJwt(user));*/
         } catch (Exception ex) {
             ex.printStackTrace();
             //LoggingUtil.logException(ex, getClass());

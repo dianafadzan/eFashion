@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface RadnikRepository extends JpaRepository<RadnikEntity,String> {
 
     RadnikEntity getByJmb(String jmb);
+    RadnikEntity getByUsername(String username);
     List<RadnikEntity> getAllByUsername(String username);
     List<RadnikEntity> getAllByAktivan(Byte aktivan);
     Optional<RadnikEntity> findByUsernameAndAktivan(String username, Byte status);
