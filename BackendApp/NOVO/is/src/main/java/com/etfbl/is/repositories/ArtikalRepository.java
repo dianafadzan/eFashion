@@ -1,7 +1,7 @@
 package com.etfbl.is.repositories;
 
-import com.etfbl.is.entities.ArtikalEntity;
-import com.etfbl.is.entities.KategorijaEntity;
+import com.etfbl.is.models.entities.ArtikalEntity;
+import com.etfbl.is.models.entities.KategorijaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

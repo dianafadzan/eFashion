@@ -1,6 +1,6 @@
 package com.etfbl.is.controllers;
 
-import com.etfbl.is.entities.KategorijaEntity;
+import com.etfbl.is.models.entities.KategorijaEntity;
 import com.etfbl.is.repositories.KategorijaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

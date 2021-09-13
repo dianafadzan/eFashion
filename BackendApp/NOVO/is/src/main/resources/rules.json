@@ -1,0 +1,10 @@
+{
+  "rules": [
+    {
+      "methods": ["GET"],
+      "pattern": "/radnici",
+      "roles": ["ADMIN","USER"]
+    }
+
+  ]
+}

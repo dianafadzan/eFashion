@@ -1,6 +1,6 @@
 package com.etfbl.is.controllers;
 
-import com.etfbl.is.entities.StavkaEntity;
+import com.etfbl.is.models.entities.StavkaEntity;
 import com.etfbl.is.repositories.StavkaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,12 +1,10 @@
-package com.etfbl.is.entities;
+package com.etfbl.is.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @Entity

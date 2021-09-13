@@ -1,6 +1,6 @@
 package com.etfbl.is.controllers;
 
-import com.etfbl.is.entities.AdministratorEntity;
+import com.etfbl.is.models.entities.AdministratorEntity;
 import com.etfbl.is.repositories.AdministratorRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

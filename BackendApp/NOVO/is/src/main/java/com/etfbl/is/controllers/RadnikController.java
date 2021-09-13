@@ -1,6 +1,6 @@
 package com.etfbl.is.controllers;
 
-import com.etfbl.is.entities.RadnikEntity;
+import com.etfbl.is.models.entities.RadnikEntity;
 import com.etfbl.is.repositories.RadnikRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

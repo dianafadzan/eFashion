@@ -1,6 +1,6 @@
 package com.etfbl.is.controllers;
 
-import com.etfbl.is.entities.RacunEntity;
+import com.etfbl.is.models.entities.RacunEntity;
 import com.etfbl.is.repositories.RacunRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

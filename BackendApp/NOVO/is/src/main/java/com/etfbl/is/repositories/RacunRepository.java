@@ -1,6 +1,6 @@
 package com.etfbl.is.repositories;
 
-import com.etfbl.is.entities.RacunEntity;
+import com.etfbl.is.models.entities.RacunEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
