@@ -12,6 +12,7 @@ public interface RadnikRepository extends JpaRepository<RadnikEntity,String> {
     List<RadnikEntity> getAllByUsername(String username);
     List<RadnikEntity> getAllByAktivan(Byte aktivan);
     Optional<RadnikEntity> findByUsernameAndAktivan(String username, Byte status);
+    Optional<RadnikEntity> findByUsername(String username);
     <T> T findByUsername(String username,Class<T> response);
 
 }

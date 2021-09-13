@@ -54,13 +54,13 @@ public class AuthServiceImpl implements AuthService {
             System.out.println("3");
             JwtRadnik user = (JwtRadnik) authenticate.getPrincipal();
             System.out.println(user);
-            if(radnikRepository==null) {
+            if(radnikRepository.findByUsername(user.getUsername())!=null) {
                 System.out.println("radnik");
-                response = administratorRepository.findAdministratorEntityByRadnikUsername(user.getUsername(), LoginResponse.class);
-            }
-            else{
-                System.out.println("administrator");
-                response = radnikRepository.findByUsername(user.getUsername(), LoginResponse.class);
+                if (administratorRepository.findByRadnikUsername(user.getUsername()) != null)
+                    response = administratorRepository.findAdministratorEntityByRadnikUsername(user.getUsername(), LoginResponse.class);
+                else
+                    response = radnikRepository.findByUsername(user.getUsername(), LoginResponse.class);
+
             }
             response.setToken(generateJwt(user));
         } catch (Exception ex) {

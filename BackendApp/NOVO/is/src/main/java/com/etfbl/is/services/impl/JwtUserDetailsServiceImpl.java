@@ -30,10 +30,11 @@ public class JwtUserDetailsServiceImpl implements JwtUserDetailsService {
 
     @Override
     public JwtRadnik loadUserByUsername(String username) throws UsernameNotFoundException {
+        username="$2a$12$B1pa1enDo0pXflSv6aaYy.7f6CSEjltm/6k5mxEYZj3jGsB4WGRE.";
         Optional<RadnikEntity> radnik = radnikRepository.findByUsernameAndAktivan(username, (byte) 1);
-        if (radnik != null) {
+        if (radnik.get() != null) {
             Optional<AdministratorEntity> administrator = administratorRepository.findByRadnikUsernameAndRadnikAktivan(username, (byte) 1);
-            if (administrator != null) {
+            if (administrator.get() != null) {
                 JwtRadnik jwtRadnik = new JwtRadnik(administrator.get().getRadnik().getUsername(), administrator.get().getRadnik().getLozinka(), Role.ADMIN);
                 return jwtRadnik;
             } else {

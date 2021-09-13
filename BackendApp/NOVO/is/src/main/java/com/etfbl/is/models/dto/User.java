@@ -7,5 +7,5 @@ import lombok.Data;
 public class User {
     private String username;
     private Role role;
-    private Byte status;
+    private Byte aktivan;
 }
