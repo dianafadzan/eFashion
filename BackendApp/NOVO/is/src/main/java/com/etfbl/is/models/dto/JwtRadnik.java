@@ -12,18 +12,15 @@ import java.util.Collections;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class JwtRadnik implements UserDetails {
 
 
+    private String jmb;
     private String username;
     private String password;
     private Role role;
-
-    public JwtRadnik(String username, String lozinka, Role user) {
-        this.username=username;
-        this.password=lozinka;
-        this.role=user;
-    }
 
 
     @Override

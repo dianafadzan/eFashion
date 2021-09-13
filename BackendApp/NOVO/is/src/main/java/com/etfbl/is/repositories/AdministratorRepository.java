@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface AdministratorRepository extends JpaRepository<AdministratorEntity,String> {
     Optional<AdministratorEntity> findByRadnikUsernameAndRadnikAktivan(String username, Byte status);
-    <T> T findAdministratorEntityByRadnikUsername(String username,Class<T> response);
     Optional<AdministratorEntity> findByRadnikUsername(String username);
+    AdministratorEntity getByRadnikJmb(String jmb);
 }

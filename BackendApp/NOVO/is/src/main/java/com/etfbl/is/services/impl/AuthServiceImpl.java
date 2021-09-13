@@ -2,6 +2,7 @@ package com.etfbl.is.services.impl;
 
 import com.etfbl.is.models.dto.JwtRadnik;
 import com.etfbl.is.models.dto.LoginResponse;
+import com.etfbl.is.models.entities.AdministratorEntity;
 import com.etfbl.is.models.entities.RadnikEntity;
 import com.etfbl.is.models.enums.Role;
 import com.etfbl.is.models.requests.LoginRequest;
@@ -37,12 +38,9 @@ public class AuthServiceImpl implements AuthService {
     private PasswordEncoder passwordEncoder;
 
     public AuthServiceImpl(AdministratorRepository administratorRepository ,RadnikRepository radnikRepository, AuthenticationManager authenticationManager) {
-        System.out.println("prvi");
         this.administratorRepository = administratorRepository;
         this.radnikRepository=radnikRepository;
         this.authenticationManager=authenticationManager;
-        System.out.println(radnikRepository);
-        System.out.println(administratorRepository);
     }
 
 
@@ -52,62 +50,67 @@ public class AuthServiceImpl implements AuthService {
         LoginResponse response = null;
         try {
             System.out.println("2");
-            System.out.println("username:"+request.getUsername());
-            System.out.println("pass:"+request.getPassword());
+            System.out.println("username:" + request.getUsername());
+            System.out.println("pass:" + request.getPassword());
             System.out.println(authenticationManager);
 
 
-            UsernamePasswordAuthenticationToken us=new UsernamePasswordAuthenticationToken(
+            UsernamePasswordAuthenticationToken us = new UsernamePasswordAuthenticationToken(
                     request.getUsername(), request.getPassword()
             );
-            String usernm=(String)us.getPrincipal();
-            String passw=(String)us.getCredentials();
-            System.out.println("usernm:"+usernm);
-            if(radnikRepository!=null){
+            /*String usernm = (String) us.getPrincipal();
+            String passw = (String) us.getCredentials();
+            System.out.println("usernm:" + usernm);
+            if (radnikRepository != null) {
                 System.out.println("uslo");
-                List<RadnikEntity> r=radnikRepository.getAllByUsername(usernm);
-                if(r!=null){
-                    System.out.println("radnik:"+r.get(0));
+                List<RadnikEntity> r = radnikRepository.getAllByUsername(usernm);
+                if (r != null) {
+                    //System.out.println("radnik:"+r.get(0));
 
-                    if(passwordEncoder.matches(passw,r.get(0).getLozinka())){
+                    if (passwordEncoder.matches(passw, r.get(0).getLozinka())) {
                         System.out.println("matches");
-                        UsernamePasswordAuthenticationToken result=new UsernamePasswordAuthenticationToken(r.get(0),passw);
+                        UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(r.get(0), passw);
                         result.setDetails(us.getDetails());
-                        System.out.println("result:"+result);
-                        JwtRadnik jwtRadnik=new JwtRadnik(usernm,passw, Role.USER);
-                        response=radnikRepository.findByUsername(jwtRadnik.getUsername(),LoginResponse.class);
+                        //System.out.println("result:"+result);
+                        JwtRadnik jwtRadnik = new JwtRadnik(r.get(0).getJmb(), usernm, passw, Role.USER);
+                        response = new LoginResponse(radnikRepository.getByJmb(jwtRadnik.getJmb()));
                         response.setToken(generateJwt(jwtRadnik));
 
-                    }else{
+                    } else {
                         System.out.println("not matches");
                     }
-                }else{
+                } else {
                     System.out.println("r null");
                 }
             }
 
-            System.out.println("us:"+us);
-            /*Authentication authenticate = authenticationManager
-                    .authenticate(us
+             */
 
-                    );
+            System.out.println("us:" + us);
+
+
+            Authentication authenticate = authenticationManager
+                    .authenticate(us);
             System.out.println("3");
             JwtRadnik user = (JwtRadnik) authenticate.getPrincipal();
             System.out.println(user);
-            if(radnikRepository.findByUsername(user.getUsername())!=null) {
+            if(radnikRepository.getByJmb(user.getJmb())!=null) {
                 System.out.println("radnik");
-                if (administratorRepository.findByRadnikUsername(user.getUsername()) != null)
-                    response = administratorRepository.findAdministratorEntityByRadnikUsername(user.getUsername(), LoginResponse.class);
+                if (administratorRepository.getByRadnikJmb(user.getJmb()) != null) {
+                    response = new LoginResponse(administratorRepository.getByRadnikJmb(user.getJmb()));
+                }
                 else
-                    response = radnikRepository.findByUsername(user.getUsername(), LoginResponse.class);
+                    response = new LoginResponse(radnikRepository.getByJmb(user.getJmb()));
 
             }
-            response.setToken(generateJwt(user));*/
+            response.setToken(generateJwt(user));
         } catch (Exception ex) {
             ex.printStackTrace();
             //LoggingUtil.logException(ex, getClass());
             //throw new UnauthorizedException();
         }
+
+
         return response;
     }
 

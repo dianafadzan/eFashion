@@ -40,7 +40,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                     .setSigningKey(authorizationSecret)
                     .parseClaimsJws(token)
                     .getBody();
-            JwtRadnik jwtUser = new JwtRadnik(claims.getId(), claims.getSubject(), Role.valueOf(claims.get("role", String.class)));
+            JwtRadnik jwtUser = new JwtRadnik(claims.getId(), claims.getSubject(),null, Role.valueOf(claims.get("role", String.class)));
             Authentication authentication = new UsernamePasswordAuthenticationToken(jwtUser, null, jwtUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception e) {

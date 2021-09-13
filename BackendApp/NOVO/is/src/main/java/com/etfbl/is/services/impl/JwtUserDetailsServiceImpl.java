@@ -30,15 +30,15 @@ public class JwtUserDetailsServiceImpl implements JwtUserDetailsService {
 
     @Override
     public JwtRadnik loadUserByUsername(String username) throws UsernameNotFoundException {
-        username="$2a$12$B1pa1enDo0pXflSv6aaYy.7f6CSEjltm/6k5mxEYZj3jGsB4WGRE.";
         Optional<RadnikEntity> radnik = radnikRepository.findByUsernameAndAktivan(username, (byte) 1);
-        if (radnik.get() != null) {
+        if (!radnik.isEmpty()) {
             Optional<AdministratorEntity> administrator = administratorRepository.findByRadnikUsernameAndRadnikAktivan(username, (byte) 1);
-            if (administrator.get() != null) {
-                JwtRadnik jwtRadnik = new JwtRadnik(administrator.get().getRadnik().getUsername(), administrator.get().getRadnik().getLozinka(), Role.ADMIN);
+            System.out.println(administrator.isEmpty());
+            if (!administrator.isEmpty()) {
+                JwtRadnik jwtRadnik = new JwtRadnik(administrator.get().getRadnik().getJmb(),administrator.get().getRadnik().getUsername(), administrator.get().getRadnik().getLozinka(), Role.ADMIN);
                 return jwtRadnik;
             } else {
-                JwtRadnik jwtRadnik = new JwtRadnik(administrator.get().getRadnik().getUsername(), administrator.get().getRadnik().getLozinka(), Role.USER);
+                JwtRadnik jwtRadnik = new JwtRadnik(radnik.get().getJmb(),radnik.get().getUsername(), radnik.get().getLozinka(), Role.USER);
                 return jwtRadnik;
             }
         } else

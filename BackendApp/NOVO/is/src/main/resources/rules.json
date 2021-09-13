@@ -3,7 +3,7 @@
     {
       "methods": ["GET"],
       "pattern": "/radnici",
-      "roles": ["ADMIN","USER"]
+      "roles": ["ADMIN"]
     }
 
   ]
