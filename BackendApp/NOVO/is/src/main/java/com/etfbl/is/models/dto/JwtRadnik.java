@@ -17,7 +17,6 @@ import java.util.Collections;
 public class JwtRadnik implements UserDetails {
 
 
-    private String jmb;
     private String username;
     private String password;
     private Role role;

@@ -35,10 +35,10 @@ public class JwtUserDetailsServiceImpl implements JwtUserDetailsService {
             Optional<AdministratorEntity> administrator = administratorRepository.findByRadnikUsernameAndRadnikAktivan(username, (byte) 1);
             System.out.println(administrator.isEmpty());
             if (!administrator.isEmpty()) {
-                JwtRadnik jwtRadnik = new JwtRadnik(administrator.get().getRadnik().getJmb(),administrator.get().getRadnik().getUsername(), administrator.get().getRadnik().getLozinka(), Role.ADMIN);
+                JwtRadnik jwtRadnik = new JwtRadnik(administrator.get().getRadnik().getUsername(), administrator.get().getRadnik().getLozinka(), Role.ADMIN);
                 return jwtRadnik;
             } else {
-                JwtRadnik jwtRadnik = new JwtRadnik(radnik.get().getJmb(),radnik.get().getUsername(), radnik.get().getLozinka(), Role.USER);
+                JwtRadnik jwtRadnik = new JwtRadnik(radnik.get().getUsername(), radnik.get().getLozinka(), Role.USER);
                 return jwtRadnik;
             }
         } else

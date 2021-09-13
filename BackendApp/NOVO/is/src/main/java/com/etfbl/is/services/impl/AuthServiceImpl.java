@@ -72,8 +72,8 @@ public class AuthServiceImpl implements AuthService {
                         UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(r.get(0), passw);
                         result.setDetails(us.getDetails());
                         //System.out.println("result:"+result);
-                        JwtRadnik jwtRadnik = new JwtRadnik(r.get(0).getJmb(), usernm, passw, Role.USER);
-                        response = new LoginResponse(radnikRepository.getByJmb(jwtRadnik.getJmb()));
+                        JwtRadnik jwtRadnik = new JwtRadnik( usernm, passw, Role.USER);
+                        response = new LoginResponse(radnikRepository.getByUsername(usernm));
                         response.setToken(generateJwt(jwtRadnik));
 
                     } else {
@@ -94,20 +94,19 @@ public class AuthServiceImpl implements AuthService {
             System.out.println("3");
             JwtRadnik user = (JwtRadnik) authenticate.getPrincipal();
             System.out.println(user);
-            if(radnikRepository.getByJmb(user.getJmb())!=null) {
+            if(radnikRepository.getByUsername(user.getUsername())!=null) {
                 System.out.println("radnik");
-                if (administratorRepository.getByRadnikJmb(user.getJmb()) != null) {
-                    response = new LoginResponse(administratorRepository.getByRadnikJmb(user.getJmb()));
+                if (administratorRepository.getByRadnikUsername(user.getUsername()) != null) {
+                    response = new LoginResponse(administratorRepository.getByRadnikUsername(user.getUsername()));
                 }
                 else
-                    response = new LoginResponse(radnikRepository.getByJmb(user.getJmb()));
+                    response = new LoginResponse(radnikRepository.getByUsername(user.getUsername()));
 
             }
             response.setToken(generateJwt(user));
         } catch (Exception ex) {
             ex.printStackTrace();
-            //LoggingUtil.logException(ex, getClass());
-            //throw new UnauthorizedException();
+
         }
 
 
